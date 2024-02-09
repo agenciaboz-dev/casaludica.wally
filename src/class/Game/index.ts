@@ -60,22 +60,17 @@ export class Game {
 
     getObjectsOverlapping(object: GameObject) {
         const overlapping = this.objects.filter((item) => {
-            // Skip comparison with itself
             if (item === object) return false
 
-            // Calculate the right and bottom edges of both objects
             const itemRight = item.x + item.width
             const itemBottom = item.y + item.height
             const objectRight = object.x + object.width
             const objectBottom = object.y + object.height
 
-            // Check if there is an overlap on the x-axis
             const overlapsX = item.x < objectRight && itemRight > object.x
 
-            // Check if there is an overlap on the y-axis
             const overlapsY = item.y < objectBottom && itemBottom > object.y
 
-            // If both x and y overlap, we have an overlapping situation
             return overlapsX && overlapsY
         })
 
