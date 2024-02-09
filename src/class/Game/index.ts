@@ -18,6 +18,8 @@ export class Game {
 
     reRender: () => void
 
+    misclicks = 0
+
     constructor(data: GameForm, reRender: () => void) {
         this.reRender = reRender
         this.theme = data.theme
@@ -88,10 +90,19 @@ export class Game {
     }
 
     onObjectPress(object: GameObject | Goal) {
-        if (object instanceof Goal) this.onGoal(object)
+        if (object instanceof Goal) {
+            this.onGoal(object)
+            return
+        }
 
         const overlapping = this.getObjectsOverlapping(object)
         const overlapped_goal = overlapping.find((item) => item instanceof Goal)
-        if (overlapped_goal instanceof Goal) this.onGoal(overlapped_goal)
+        if (overlapped_goal instanceof Goal) {
+            this.onGoal(overlapped_goal)
+            return
+        }
+
+        this.misclicks += 1
+        this.reRender()
     }
 }

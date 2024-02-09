@@ -4,6 +4,7 @@ import { ImageBackground, Text, TouchableOpacity, View } from "react-native"
 import { Game } from "../../class/Game"
 import { ObjectComponent } from "./ObjectComponent"
 import { GoalsContainer } from "./GoalsContainer"
+import { ScoreContainer } from "./ScoreContainer"
 
 interface GamePageProps {
     navigation: NavigationProp<any, any>
@@ -36,6 +37,7 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
                 <ObjectComponent key={index} object={object} navigation={navigation} game={game} />
             ))}
             <GoalsContainer game={game} navigation={navigation} offsetY={offsetY} />
+            <ScoreContainer game={game} navigation={navigation} />
         </ImageBackground>
     )
 }
