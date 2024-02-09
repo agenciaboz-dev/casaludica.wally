@@ -25,7 +25,7 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
                 <Text>reset</Text>
             </TouchableOpacity>
             {game.objects.map((object, index) => (
-                <ObjectComponent key={index} object={object} navigation={navigation} />
+                <ObjectComponent key={index} object={object} navigation={navigation} game={game} />
             ))}
         </ImageBackground>
     )
