@@ -20,7 +20,7 @@ export class Game {
     constructor(data: GameForm, reRender: () => void) {
         this.reRender = reRender
         this.theme = data.theme
-        this.difficulty = data.difficulty || 1
+        this.difficulty = data.difficulty || 2
 
         this.max_objects_index = Object.entries(images.game[this.theme].objects).reduce(
             (maximum, [key]) => (Number(key) > maximum ? Number(key) : maximum),

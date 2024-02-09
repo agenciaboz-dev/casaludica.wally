@@ -21,7 +21,7 @@ export const GoalsContainer: React.FC<GoalsContainerProps> = ({ navigation, game
                 left: 0,
                 width: "100%",
                 height: 100,
-
+                pointerEvents: "none",
                 padding: 20,
                 zIndex: 999,
                 elevation: 999,
@@ -31,7 +31,10 @@ export const GoalsContainer: React.FC<GoalsContainerProps> = ({ navigation, game
                 style={{
                     gap: 20,
                     flexDirection: "row",
-                    backgroundColor: "#ff000080",
+                    backgroundColor: "#c8c8c860",
+                    borderColor: "yellow",
+                    borderWidth: 2,
+                    borderRadius: 50,
                     width: "100%",
                     height: "100%",
                     alignItems: "center",
