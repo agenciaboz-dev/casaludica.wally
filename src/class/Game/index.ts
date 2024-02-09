@@ -6,7 +6,6 @@ import { Goal } from "../Goal"
 
 export class Game {
     theme: ThemeOption
-    difficulty: number
     background: ImageSourcePropType
 
     objects: (GameObject | Goal)[] = []
@@ -24,7 +23,6 @@ export class Game {
         this.reRender = reRender
         this.theme = data.theme
         this.offsetY = data.offsetY
-        this.difficulty = data.difficulty || 1
 
         this.max_objects_index = Object.entries(images.game[this.theme].objects).reduce(
             (maximum, [key]) => (Number(key) > maximum ? Number(key) : maximum),
@@ -33,11 +31,11 @@ export class Game {
 
         this.background = images.game[this.theme].backgrounds[1]
 
-        for (let index = 0; index < this.difficulty * 1; index++) {
+        for (let index = 0; index < data.goals; index++) {
             this.addGoal()
         }
 
-        for (let index = 0; index < this.difficulty * 100; index++) {
+        for (let index = 0; index < data.objects; index++) {
             this.addObject()
         }
     }

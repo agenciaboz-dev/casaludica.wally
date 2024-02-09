@@ -7,12 +7,9 @@ interface HomeProps {
 }
 
 export const Home: React.FC<HomeProps> = ({ navigation }) => {
-    const maxHeight = Dimensions.get("window").height
-    const maxWidth = Dimensions.get("window").height
-
     return (
         <View style={{ flex: 1, justifyContent: "center", gap: 50, alignItems: "center" }}>
-            <TouchableOpacity onPress={() => navigation.navigate("game")}>
+            <TouchableOpacity onPress={() => navigation.navigate("settings")}>
                 <Text>Jogar</Text>
             </TouchableOpacity>
 

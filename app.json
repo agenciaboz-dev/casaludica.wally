@@ -1,7 +1,8 @@
 {
   "expo": {
     "name": "casaludica.wally",
-    "slug": "casaludica.wally",
+    "slug": "casaludicawally",
+    "owner": "agenciaboz-dev",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -15,16 +16,22 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.agenciabozdev.casaludicawally"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "22875742-a038-44a2-9b35-e279396c786f"
+      }
     }
   }
 }

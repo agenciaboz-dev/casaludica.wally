@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { NavigationProp } from "@react-navigation/native"
 import { ImageBackground, Text, TouchableOpacity, View } from "react-native"
 import { Game } from "../../class/Game"
 import { ObjectComponent } from "./ObjectComponent"
 import { GoalsContainer } from "./GoalsContainer"
 import { ScoreContainer } from "./ScoreContainer"
+import SettingsContext from "../../contexts/settingsContext"
+import { GameForm } from "../../class/Game/GameForm"
 
 interface GamePageProps {
     navigation: NavigationProp<any, any>
@@ -12,16 +14,20 @@ interface GamePageProps {
 
 export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
     const offsetY = 100
+    const { settings, setSettings } = useContext(SettingsContext)
 
     const [_, setReRender] = useState({})
 
     const triggerRerender = () => {
         setReRender({})
     }
-    const [game, setGame] = useState(new Game({ theme: 1, offsetY }, triggerRerender))
+
+    const game_settings: GameForm = { theme: 1, offsetY, goals: settings.goals, objects: settings.objects }
+
+    const [game, setGame] = useState(new Game(game_settings, triggerRerender))
 
     const reset = () => {
-        setGame(new Game({ theme: 1, offsetY }, triggerRerender))
+        setGame(new Game(game_settings, triggerRerender))
     }
 
     useEffect(() => {

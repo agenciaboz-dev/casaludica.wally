@@ -1,6 +1,6 @@
 import React from "react"
 import { NavigationProp } from "@react-navigation/native"
-import { Image, ImageBackground, View } from "react-native"
+import { Dimensions, Image, ImageBackground, View } from "react-native"
 import { Game } from "../../class/Game"
 import { Goal } from "../../class/Goal"
 import images from "../../images"
@@ -13,6 +13,7 @@ interface GoalsContainerProps {
 }
 
 export const GoalsContainer: React.FC<GoalsContainerProps> = ({ navigation, game, offsetY }) => {
+    const { width } = Dimensions.get("window")
     return (
         <View
             style={{
@@ -22,7 +23,7 @@ export const GoalsContainer: React.FC<GoalsContainerProps> = ({ navigation, game
                 left: 0,
                 width: "100%",
                 height: offsetY,
-                pointerEvents: "none",
+                // pointerEvents: "none",
                 padding: 20,
                 zIndex: 999,
                 elevation: 999,
@@ -36,7 +37,7 @@ export const GoalsContainer: React.FC<GoalsContainerProps> = ({ navigation, game
                     borderColor: "yellow",
                     borderWidth: 2,
                     borderRadius: 50,
-                    width: "100%",
+                    width: width - 40,
                     height: "100%",
                     alignItems: "center",
                     padding: 10,

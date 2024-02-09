@@ -1,6 +1,7 @@
 export declare interface GameForm {
     theme: ThemeOption
-    difficulty?: number
+    goals: number
+    objects: number
     offsetY?: number
 }
 
