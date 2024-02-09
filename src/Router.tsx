@@ -1,8 +1,8 @@
 import React from "react"
 import { NavigationContainer } from "@react-navigation/native"
 import { NativeStackNavigationOptions, createNativeStackNavigator } from "@react-navigation/native-stack"
-import { colors } from "./style/colors"
-import { routes } from "./routes"
+import { Home } from "./screens/Home"
+import { GamePage } from "./screens/Game"
 
 interface RoutesProps {}
 
@@ -10,9 +10,9 @@ export const Routes: React.FC<RoutesProps> = ({}) => {
     const Stack = createNativeStackNavigator()
     const navigator_options: NativeStackNavigationOptions = {
         headerStyle: {
-            backgroundColor: colors.secondary,
+            backgroundColor: "red",
         },
-        headerTintColor: colors.primary,
+        headerTintColor: "white",
         headerTitleStyle: {
             fontWeight: "bold",
         },
@@ -29,9 +29,8 @@ export const Routes: React.FC<RoutesProps> = ({}) => {
     return (
         <NavigationContainer>
             <Stack.Navigator initialRouteName="home" screenOptions={navigator_options}>
-                {Object.entries(routes).map(([_, screen]) => (
-                    <Stack.Screen key={screen.name} name={screen.name} component={screen.component} />
-                ))}
+                <Stack.Screen name={"home"} component={Home} />
+                <Stack.Screen name={"game"} component={GamePage} />
             </Stack.Navigator>
         </NavigationContainer>
     )

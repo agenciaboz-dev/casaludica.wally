@@ -1,14 +1,14 @@
 import { ImageSourcePropType } from "react-native"
-import { Object } from "../Object"
+import { GameObject } from "../Object"
 import { GameForm, ThemeOption } from "./GameForm"
-import images from "../../screens/Gallery/images"
+import images from "../../images"
 
 export class Game {
     theme: ThemeOption
     difficulty: number
     background: ImageSourcePropType
-    
-    objects: Object[] = []
+
+    objects: GameObject[] = []
     images = images.game[1]
 
     constructor(data: GameForm) {
@@ -19,7 +19,7 @@ export class Game {
     }
 
     addObject() {
-        const object = new Object(this.images.objects[1])
+        const object = new GameObject(this.images.objects[1])
         this.objects.push(object)
     }
 }

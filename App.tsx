@@ -1,32 +1,13 @@
 import { StatusBar } from "expo-status-bar"
-import { StyleSheet, ImageBackground } from "react-native"
-import { PaperProvider } from "react-native-paper"
+import { StyleSheet, Text, View } from "react-native"
 import { Routes } from "./src/Router"
-import { theme } from "./src/style/theme"
-import { useFonts } from 'expo-font';
-import * as MediaLibrary from "expo-media-library"
 
 export default function App() {
-    const [status, requestPermission] = MediaLibrary.usePermissions()
-
-    // let [loaded] = useFonts({
-    //     KGSecondChancesSolid: require("./assets/fonts/KGSecondChancesSolid.ttf"),
-    //     KGSecondChancesSketch: require("./assets/fonts/KGSecondChancesSketch.ttf"),
-    // })
-
-    // if (!loaded) {
-    //     return <></>
-    // }
-
-    if (status === null) {
-        requestPermission()
-    }
-
     return (
-        <PaperProvider theme={theme}>
+        <>
             <StatusBar style="auto" hidden />
             <Routes />
-        </PaperProvider>
+        </>
     )
 }
 
