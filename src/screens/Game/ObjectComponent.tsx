@@ -3,10 +3,11 @@ import { NavigationProp } from "@react-navigation/native"
 import { Alert, Image, TouchableOpacity, View } from "react-native"
 import { GameObject } from "../../class/Object"
 import { Game } from "../../class/Game"
+import { Goal } from "../../class/Goal"
 
 interface ObjectComponentProps {
     navigation: NavigationProp<any, any>
-    object: GameObject
+    object: GameObject | Goal
     game: Game
 }
 

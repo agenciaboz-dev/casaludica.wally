@@ -2,19 +2,23 @@ import { Alert, ImageSourcePropType } from "react-native"
 import { GameObject } from "../Object"
 import { GameForm, ThemeOption } from "./GameForm"
 import images from "../../images"
+import { Goal } from "../Goal"
 
 export class Game {
     theme: ThemeOption
     difficulty: number
     background: ImageSourcePropType
 
-    objects: GameObject[] = []
+    objects: (GameObject | Goal)[] = []
     images = images.game[1]
     goals: ImageSourcePropType[] = []
 
     max_objects_index: number
 
-    constructor(data: GameForm) {
+    reRender: () => void
+
+    constructor(data: GameForm, reRender: () => void) {
+        this.reRender = reRender
         this.theme = data.theme
         this.difficulty = data.difficulty || 1
 
@@ -47,13 +51,13 @@ export class Game {
     }
 
     private addObject() {
-        const object = new GameObject({ image: this.getRandomValidObjectImage() })
+        const object = new GameObject({ image: this.getRandomValidObjectImage() }, this.reRender)
         this.objects.push(object)
     }
 
     private addGoal() {
         const image = this.getRandomValidObjectImage()
-        const object = new GameObject({ image, goal: true })
+        const object = new Goal({ image }, this.reRender)
         this.goals.push(image)
         this.objects.push(object)
     }
@@ -77,16 +81,15 @@ export class Game {
         return overlapping
     }
 
-    onGoal(object: GameObject) {
-        Alert.alert(`achou`)
-        console.log("achou")
+    onGoal(object: Goal) {
+        object.onGoal()
     }
 
-    onObjectPress(object: GameObject) {
-        if (object.goal) this.onGoal(object)
+    onObjectPress(object: GameObject | Goal) {
+        if (object instanceof Goal) this.onGoal(object)
 
         const overlapping = this.getObjectsOverlapping(object)
-        const overlapped_goal = overlapping.find((item) => item.goal)
-        if (overlapped_goal) this.onGoal(overlapped_goal)
+        const overlapped_goal = overlapping.find((item) => item instanceof Goal)
+        if (overlapped_goal instanceof Goal) this.onGoal(overlapped_goal)
     }
 }

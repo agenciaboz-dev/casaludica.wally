@@ -1,5 +1,6 @@
 import { Alert, Dimensions, ImageSourcePropType } from "react-native"
 import { ObjectForm } from "./ObjectForm"
+import { uid } from "uid"
 
 const { width, height } = Dimensions.get("window")
 
@@ -7,18 +8,19 @@ export class GameObject {
     x: number
     y: number
     image: ImageSourcePropType
-    goal = false
     width = 50
     height = 50
     elevation: number
 
-    constructor(data: ObjectForm) {
+    reRender: () => void
+
+    constructor(data: ObjectForm, reRender: () => void) {
+        this.reRender = reRender
         const { x, y, z } = this.generatePos()
         this.x = x
         this.y = y
         this.elevation = z
         this.image = data.image
-        this.goal = !!data.goal
     }
 
     generatePos() {
@@ -40,3 +42,4 @@ export class GameObject {
         return { x, y, z }
     }
 }
+

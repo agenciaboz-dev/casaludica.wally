@@ -18,6 +18,8 @@ const images = {
             },
         },
     },
+
+    found: require("../assets/found.png"),
 }
 
 export default images
