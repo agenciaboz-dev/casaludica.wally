@@ -9,9 +9,10 @@ import { GoalComponent } from "./GoalComponent"
 interface GoalsContainerProps {
     navigation: NavigationProp<any, any>
     game: Game
+    offsetY?: number
 }
 
-export const GoalsContainer: React.FC<GoalsContainerProps> = ({ navigation, game }) => {
+export const GoalsContainer: React.FC<GoalsContainerProps> = ({ navigation, game, offsetY }) => {
     return (
         <View
             style={{
@@ -20,7 +21,7 @@ export const GoalsContainer: React.FC<GoalsContainerProps> = ({ navigation, game
                 bottom: 0,
                 left: 0,
                 width: "100%",
-                height: 100,
+                height: offsetY,
                 pointerEvents: "none",
                 padding: 20,
                 zIndex: 999,

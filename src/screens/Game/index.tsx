@@ -10,15 +10,17 @@ interface GamePageProps {
 }
 
 export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
+    const offsetY = 100
+
     const [_, setReRender] = useState({})
 
     const triggerRerender = () => {
         setReRender({})
     }
-    const [game, setGame] = useState(new Game({ theme: 1 }, triggerRerender))
+    const [game, setGame] = useState(new Game({ theme: 1, offsetY }, triggerRerender))
 
     const reset = () => {
-        setGame(new Game({ theme: 1 }, triggerRerender))
+        setGame(new Game({ theme: 1, offsetY }, triggerRerender))
     }
 
     useEffect(() => {
@@ -33,7 +35,7 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
             {game.objects.map((object, index) => (
                 <ObjectComponent key={index} object={object} navigation={navigation} game={game} />
             ))}
-            <GoalsContainer game={game} navigation={navigation} />
+            <GoalsContainer game={game} navigation={navigation} offsetY={offsetY} />
         </ImageBackground>
     )
 }

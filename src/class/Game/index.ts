@@ -14,13 +14,15 @@ export class Game {
     goals: ImageSourcePropType[] = []
 
     max_objects_index: number
+    offsetY?: number
 
     reRender: () => void
 
     constructor(data: GameForm, reRender: () => void) {
         this.reRender = reRender
         this.theme = data.theme
-        this.difficulty = data.difficulty || 2
+        this.offsetY = data.offsetY
+        this.difficulty = data.difficulty || 1
 
         this.max_objects_index = Object.entries(images.game[this.theme].objects).reduce(
             (maximum, [key]) => (Number(key) > maximum ? Number(key) : maximum),
@@ -51,13 +53,13 @@ export class Game {
     }
 
     private addObject() {
-        const object = new GameObject({ image: this.getRandomValidObjectImage() }, this.reRender)
+        const object = new GameObject({ image: this.getRandomValidObjectImage(), offsetY: this.offsetY }, this.reRender)
         this.objects.push(object)
     }
 
     private addGoal() {
         const image = this.getRandomValidObjectImage()
-        const object = new Goal({ image }, this.reRender)
+        const object = new Goal({ image, offsetY: this.offsetY }, this.reRender)
         this.goals.push(image)
         this.objects.push(object)
     }

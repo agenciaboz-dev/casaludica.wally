@@ -16,25 +16,23 @@ export class GameObject {
 
     constructor(data: ObjectForm, reRender: () => void) {
         this.reRender = reRender
-        const { x, y, z } = this.generatePos()
+        const { x, y, z } = this.generatePos(data.offsetY)
         this.x = x
         this.y = y
         this.elevation = z
         this.image = data.image
     }
 
-    generatePos() {
+    generatePos(offsetY?: number) {
         let x = Math.random() * width
-        let y = Math.random() * height
+        let y = Math.random() * height + (offsetY || 0)
 
         if (x + this.width > width) {
-            const difference = x + this.width - width
-            x -= difference
+            x = this.generatePos(offsetY).x
         }
 
         if (y + this.height > height) {
-            const difference = y + this.height - height
-            y -= difference
+            y = this.generatePos(offsetY).y
         }
 
         const z = Math.floor(height - y)
