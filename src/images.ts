@@ -6,6 +6,7 @@ const images = {
             },
             objects: {
                 [1]: require("../assets/game/1/objects/1.png"),
+                [2]: require("../assets/game/1/objects/2.png"),
             },
         },
     },
