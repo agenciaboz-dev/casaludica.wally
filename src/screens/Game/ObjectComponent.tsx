@@ -3,7 +3,7 @@ import { NavigationProp } from "@react-navigation/native"
 import { Alert, Image, ImageBackground, TouchableOpacity, View } from "react-native"
 import { GameObject } from "../../class/Element/Element"
 import { Game } from "../../class/Game/Game"
-import { Goal } from "../../class/Goal"
+import { Goal } from "../../class/Goal/Goal"
 import images from "../../images"
 import SettingsContext from "../../contexts/settingsContext"
 
@@ -17,14 +17,25 @@ export const ObjectComponent: React.FC<ObjectComponentProps> = ({ navigation, ob
     const zIndex = object instanceof Goal && object.found ? 999 : object.elevation
 
     const { settings } = useContext(SettingsContext)
+    const size = object.width * (object.scenery ? settings.scenery_scale : 1)
 
     const onPress = () => {
         game.onObjectPress(object)
     }
 
     return (
-        <TouchableOpacity style={{ position: "absolute", bottom: object.y, left: object.x, elevation: zIndex, zIndex: zIndex }} onPress={onPress}>
-            <ImageBackground source={object.image} style={{ width: object.width, height: object.height }}>
+        <TouchableOpacity
+            style={{
+                position: "absolute",
+                bottom: object.y,
+                left: object.x,
+                elevation: zIndex,
+                zIndex: zIndex,
+                pointerEvents: object.scenery ? "none" : "auto",
+            }}
+            onPress={onPress}
+        >
+            <ImageBackground source={object.image} style={{ width: size, height: size }}>
                 {object instanceof Goal && object.found && <Image source={images.found} style={{ width: settings.size, height: settings.size }} />}
             </ImageBackground>
         </TouchableOpacity>

@@ -4,22 +4,22 @@ import { Text, View } from "react-native"
 import SettingsContext from "../../contexts/settingsContext"
 import { Slider } from "@miblanchard/react-native-slider"
 
-interface SizeSettingProps {}
+interface ScenerySettingProps {}
 
-export const SizeSetting: React.FC<SizeSettingProps> = ({}) => {
+export const ScenerySetting: React.FC<ScenerySettingProps> = ({}) => {
     const { settings, setSettings } = useContext(SettingsContext)
 
     return (
         <View style={{ width: 300 }}>
             <View style={{ flexDirection: "row", width: 300, justifyContent: "space-between" }}>
-                <Text>{"tamanho"}</Text>
-                <Text>{settings.size}</Text>
+                <Text>{"elementos cenário"}</Text>
+                <Text>{settings.scenery}</Text>
             </View>
             <Slider
-                value={settings.size}
-                onValueChange={(value) => setSettings({ ...settings, size: value[0] })}
-                maximumValue={200}
-                minimumValue={10}
+                value={settings.scenery}
+                onValueChange={(value) => setSettings({ ...settings, scenery: value[0] })}
+                maximumValue={100}
+                minimumValue={5}
                 containerStyle={{ width: "100%" }}
                 step={1}
             />
