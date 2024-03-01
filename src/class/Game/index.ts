@@ -24,7 +24,7 @@ export class Game {
         this.theme = data.theme
         this.offsetY = data.offsetY
 
-        this.max_objects_index = Object.entries(images.game[this.theme].objects).reduce(
+        this.max_objects_index = Object.entries(images.game[this.theme].elements).reduce(
             (maximum, [key]) => (Number(key) > maximum ? Number(key) : maximum),
             1
         )
@@ -43,7 +43,7 @@ export class Game {
     private getRandomValidObjectImage() {
         const random_index = Math.ceil(Math.random() * this.max_objects_index)
         // @ts-ignore
-        let random_image = this.images.objects[random_index]
+        let random_image = this.images.elements[random_index]
 
         if (this.goals.includes(random_image)) {
             random_image = this.getRandomValidObjectImage()
