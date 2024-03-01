@@ -5,6 +5,8 @@ import { Home } from "./screens/Home"
 import { GamePage } from "./screens/Game"
 import { SettingsPage } from "./screens/Settings"
 import { SettingsProvider } from "./contexts/settingsContext"
+import { Text } from "react-native"
+import constants from "expo-constants"
 
 interface RoutesProps {}
 
@@ -37,6 +39,7 @@ export const Routes: React.FC<RoutesProps> = ({}) => {
                     <Stack.Screen name={"game"} component={GamePage} />
                 </Stack.Navigator>
             </NavigationContainer>
+            <Text style={{ position: "absolute", bottom: 5, right: 5, color: "red" }}>{constants.expoConfig?.version}</Text>
         </SettingsProvider>
     )
 }
