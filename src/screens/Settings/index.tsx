@@ -13,7 +13,7 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ navigation }) => {
         <View style={{ flex: 1, alignItems: "center", gap: 20, justifyContent: "center" }}>
             <GoalSetting navigation={navigation} />
             <ObjectSetting navigation={navigation} />
-            <TouchableOpacity style={{ backgroundColor: "#00afef", padding: 10, borderRadius: 10 }} onPress={() => navigation.navigate("game")}>
+            <TouchableOpacity style={{ backgroundColor: "#000", padding: 10, borderRadius: 10 }} onPress={() => navigation.navigate("game")}>
                 <Text style={{ fontWeight: "bold", color: "white" }}>começar</Text>
             </TouchableOpacity>
         </View>
