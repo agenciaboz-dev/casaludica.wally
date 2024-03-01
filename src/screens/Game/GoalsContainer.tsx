@@ -1,7 +1,7 @@
 import React from "react"
 import { NavigationProp } from "@react-navigation/native"
 import { Dimensions, Image, ImageBackground, View } from "react-native"
-import { Game } from "../../class/Game"
+import { Game } from "../../class/Game/Game"
 import { Goal } from "../../class/Goal"
 import images from "../../images"
 import { GoalComponent } from "./GoalComponent"

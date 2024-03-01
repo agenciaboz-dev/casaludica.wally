@@ -1,7 +1,7 @@
 import React from "react"
 import { NavigationProp } from "@react-navigation/native"
 import { Text, View } from "react-native"
-import { Game } from "../../class/Game"
+import { Game } from "../../class/Game/Game"
 
 interface ScoreContainerProps {
     navigation: NavigationProp<any, any>

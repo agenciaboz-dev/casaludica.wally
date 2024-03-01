@@ -2,7 +2,7 @@ import React from "react"
 import { NavigationProp } from "@react-navigation/native"
 import { Alert, Image, ImageBackground, TouchableOpacity, View } from "react-native"
 import { GameObject } from "../../class/Object"
-import { Game } from "../../class/Game"
+import { Game } from "../../class/Game/Game"
 import { Goal } from "../../class/Goal"
 import images from "../../images"
 
