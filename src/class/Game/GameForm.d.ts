@@ -2,6 +2,7 @@ export declare interface GameForm {
     theme: ThemeOption
     goals: number
     objects: number
+    size: number
     offsetY?: number
 }
 

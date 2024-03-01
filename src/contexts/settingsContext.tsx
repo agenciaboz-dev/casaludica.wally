@@ -4,6 +4,7 @@ import React from "react"
 export interface Settings {
     goals: number
     objects: number
+    size: number
 }
 
 interface SettingsContextValue {
@@ -20,7 +21,7 @@ const SettingsContext = createContext<SettingsContextValue>({} as SettingsContex
 export default SettingsContext
 
 export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) => {
-    const [settings, setSettings] = useState<Settings>({ goals: 2, objects: 100 })
+    const [settings, setSettings] = useState<Settings>({ goals: 2, objects: 100, size: 50 })
 
     return <SettingsContext.Provider value={{ settings, setSettings }}>{children}</SettingsContext.Provider>
 }

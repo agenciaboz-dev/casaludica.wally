@@ -8,14 +8,16 @@ export class GameObject {
     x: number
     y: number
     image: ImageSourcePropType
-    width = 50
-    height = 50
+    width: number
+    height: number
     elevation: number
 
     reRender: () => void
 
     constructor(data: ObjectForm, reRender: () => void) {
         this.reRender = reRender
+        this.width = data.size
+        this.height = data.size
         const { x, y, z } = this.generatePos(data.offsetY)
         this.x = x
         this.y = y
@@ -40,4 +42,3 @@ export class GameObject {
         return { x, y, z }
     }
 }
-

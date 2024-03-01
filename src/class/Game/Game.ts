@@ -1,5 +1,5 @@
 import { Alert, ImageSourcePropType } from "react-native"
-import { GameObject } from "../Object"
+import { GameObject } from "../Element/Element"
 import { GameForm, ThemeOption } from "./GameForm"
 import images from "../../images"
 import { Goal } from "../Goal"
@@ -7,6 +7,7 @@ import { Goal } from "../Goal"
 export class Game {
     theme: ThemeOption
     background: ImageSourcePropType
+    size: number
 
     objects: (GameObject | Goal)[] = []
     images = images.game[1]
@@ -23,6 +24,7 @@ export class Game {
         this.reRender = reRender
         this.theme = data.theme
         this.offsetY = data.offsetY
+        this.size = data.size
 
         this.max_objects_index = Object.entries(images.game[this.theme].objectives).reduce(
             (maximum, [key]) => (Number(key) > maximum ? Number(key) : maximum),
@@ -65,13 +67,13 @@ export class Game {
     }
 
     private addObject() {
-        const object = new GameObject({ image: this.getRandomPropImage(), offsetY: this.offsetY }, this.reRender)
+        const object = new GameObject({ image: this.getRandomPropImage(), offsetY: this.offsetY, size: this.size }, this.reRender)
         this.objects.push(object)
     }
 
     private addGoal() {
         const image = this.getRandomObjectiveImage()
-        const object = new Goal({ image, offsetY: this.offsetY }, this.reRender)
+        const object = new Goal({ image, offsetY: this.offsetY, size: this.size }, this.reRender)
         this.goals.push(image)
         this.objects.push(object)
     }
