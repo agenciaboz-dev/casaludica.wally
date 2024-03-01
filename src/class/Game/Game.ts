@@ -24,7 +24,7 @@ export class Game {
         this.theme = data.theme
         this.offsetY = data.offsetY
 
-        this.max_objects_index = Object.entries(images.game[this.theme].elements).reduce(
+        this.max_objects_index = Object.entries(images.game[this.theme].objectives).reduce(
             (maximum, [key]) => (Number(key) > maximum ? Number(key) : maximum),
             1
         )
@@ -40,25 +40,37 @@ export class Game {
         }
     }
 
-    private getRandomValidObjectImage() {
+    private getRandomObjectiveImage() {
         const random_index = Math.ceil(Math.random() * this.max_objects_index)
         // @ts-ignore
-        let random_image = this.images.elements[random_index]
+        let random_image = this.images.objectives[random_index]
 
         if (this.goals.includes(random_image)) {
-            random_image = this.getRandomValidObjectImage()
+            random_image = this.getRandomObjectiveImage()
+        }
+
+        return random_image
+    }
+
+    private getRandomPropImage() {
+        const random_index = Math.ceil(Math.random() * this.max_objects_index)
+        // @ts-ignore
+        let random_image = this.images.props[random_index]
+
+        if (this.goals.includes(random_image)) {
+            random_image = this.getRandomPropImage()
         }
 
         return random_image
     }
 
     private addObject() {
-        const object = new GameObject({ image: this.getRandomValidObjectImage(), offsetY: this.offsetY }, this.reRender)
+        const object = new GameObject({ image: this.getRandomPropImage(), offsetY: this.offsetY }, this.reRender)
         this.objects.push(object)
     }
 
     private addGoal() {
-        const image = this.getRandomValidObjectImage()
+        const image = this.getRandomObjectiveImage()
         const object = new Goal({ image, offsetY: this.offsetY }, this.reRender)
         this.goals.push(image)
         this.objects.push(object)

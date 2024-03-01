@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react"
 import { NavigationProp } from "@react-navigation/native"
 import { ImageBackground, Text, TouchableOpacity, View } from "react-native"
-import { Game } from "../../class/Game"
+import { Game } from "../../class/Game/Game"
 import { ObjectComponent } from "./ObjectComponent"
 import { GoalsContainer } from "./GoalsContainer"
 import { ScoreContainer } from "./ScoreContainer"
