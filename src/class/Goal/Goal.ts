@@ -1,5 +1,5 @@
-import { GameObject } from "../Object"
-import { ObjectForm } from "../Object/ObjectForm"
+import { GameObject } from "../Element/Element"
+import { ObjectForm } from "../Element/ObjectForm"
 
 export class Goal extends GameObject {
     found = false

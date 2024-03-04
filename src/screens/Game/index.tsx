@@ -22,7 +22,7 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
         setReRender({})
     }
 
-    const game_settings: GameForm = { theme: 1, offsetY, goals: settings.goals, objects: settings.objects }
+    const game_settings: GameForm = { theme: 1, offsetY, settings }
 
     const [game, setGame] = useState(new Game(game_settings, triggerRerender))
 

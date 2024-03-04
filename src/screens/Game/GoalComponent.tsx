@@ -1,7 +1,7 @@
 import React from "react"
 import { NavigationProp } from "@react-navigation/native"
 import { Image, ImageBackground, View } from "react-native"
-import { Goal } from "../../class/Goal"
+import { Goal } from "../../class/Goal/Goal"
 import images from "../../images"
 
 interface GoalComponentProps {

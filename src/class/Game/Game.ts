@@ -1,8 +1,9 @@
 import { Alert, ImageSourcePropType } from "react-native"
-import { GameObject } from "../Object"
+import { GameObject } from "../Element/Element"
 import { GameForm, ThemeOption } from "./GameForm"
 import images from "../../images"
-import { Goal } from "../Goal"
+import { Goal } from "../Goal/Goal"
+import { Settings } from "../../contexts/settingsContext"
 
 export class Game {
     theme: ThemeOption
@@ -12,8 +13,9 @@ export class Game {
     images = images.game[1]
     goals: ImageSourcePropType[] = []
 
-    max_objects_index: number
     offsetY?: number
+
+    settings: Settings
 
     reRender: () => void
 
@@ -23,55 +25,45 @@ export class Game {
         this.reRender = reRender
         this.theme = data.theme
         this.offsetY = data.offsetY
-
-        this.max_objects_index = Object.entries(images.game[this.theme].objectives).reduce(
-            (maximum, [key]) => (Number(key) > maximum ? Number(key) : maximum),
-            1
-        )
+        this.settings = data.settings
 
         this.background = images.game[this.theme].backgrounds[1]
 
-        for (let index = 0; index < data.goals; index++) {
+        for (let index = 0; index < data.settings.goals; index++) {
             this.addGoal()
         }
 
-        for (let index = 0; index < data.objects; index++) {
+        for (let index = 0; index < data.settings.objects; index++) {
             this.addObject()
         }
+
+        for (let index = 0; index < data.settings.scenery; index++) {
+            this.addObject(true)
+        }
     }
 
-    private getRandomObjectiveImage() {
-        const random_index = Math.ceil(Math.random() * this.max_objects_index)
-        // @ts-ignore
-        let random_image = this.images.objectives[random_index]
+    private getRandomValidImage(images: any, goal?: boolean) {
+        const max_index = Object.entries(images).reduce((maximum, [key]) => (Number(key) > maximum ? Number(key) : maximum), 1)
 
-        if (this.goals.includes(random_image)) {
-            random_image = this.getRandomObjectiveImage()
+        const random_index = Math.ceil(Math.random() * max_index)
+        let random_image = images[random_index]
+
+        if (goal && this.goals.includes(random_image)) {
+            random_image = this.getRandomValidImage(images, true)
         }
 
         return random_image
     }
 
-    private getRandomPropImage() {
-        const random_index = Math.ceil(Math.random() * this.max_objects_index)
-        // @ts-ignore
-        let random_image = this.images.props[random_index]
-
-        if (this.goals.includes(random_image)) {
-            random_image = this.getRandomPropImage()
-        }
-
-        return random_image
-    }
-
-    private addObject() {
-        const object = new GameObject({ image: this.getRandomPropImage(), offsetY: this.offsetY }, this.reRender)
+    private addObject(scenery?: boolean) {
+        const image = this.getRandomValidImage(scenery ? this.images.scenery : this.images.props)
+        const object = new GameObject({ image, offsetY: this.offsetY, settings: this.settings, scenery }, this.reRender)
         this.objects.push(object)
     }
 
     private addGoal() {
-        const image = this.getRandomObjectiveImage()
-        const object = new Goal({ image, offsetY: this.offsetY }, this.reRender)
+        const image = this.getRandomValidImage(this.images.objectives, true)
+        const object = new Goal({ image, offsetY: this.offsetY, settings: this.settings }, this.reRender)
         this.goals.push(image)
         this.objects.push(object)
     }

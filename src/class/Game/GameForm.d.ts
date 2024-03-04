@@ -1,7 +1,8 @@
+import { Settings } from "../../contexts/settingsContext"
+
 export declare interface GameForm {
     theme: ThemeOption
-    goals: number
-    objects: number
+    settings: Settings
     offsetY?: number
 }
 
