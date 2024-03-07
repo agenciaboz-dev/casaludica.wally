@@ -96,7 +96,7 @@ export class Game {
 
         const overlapping = this.getObjectsOverlapping(object)
         const overlapped_goal = overlapping.find((item) => item instanceof Goal)
-        if (overlapped_goal instanceof Goal) {
+        if (overlapped_goal instanceof Goal && !overlapped_goal.found) {
             this.onGoal(overlapped_goal)
             return
         }
