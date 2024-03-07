@@ -35,7 +35,7 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
     }, [game.objects])
 
     return (
-        <ImageBackground style={{ flex: 1, position: "relative" }} source={game.background}>
+        <ImageBackground style={{ flex: 1, position: "relative" }} imageStyle={{ resizeMode: "stretch" }} source={game.background}>
             <TouchableOpacity onPress={reset} style={{ elevation: 999, zIndex: 999, width: 50, borderColor: "red", borderWidth: 1 }}>
                 <Text>reset</Text>
             </TouchableOpacity>

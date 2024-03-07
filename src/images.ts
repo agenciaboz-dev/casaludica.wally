@@ -3,6 +3,8 @@ const images = {
         [1]: {
             backgrounds: {
                 [1]: require("../assets/game/1/background/1.webp"),
+                [2]: require("../assets/game/1/background/2.webp"),
+                [3]: require("../assets/game/1/background/3.webp"),
             },
             objectives: {
                 [1]: require("../assets/game/1/objectives/1.webp"),

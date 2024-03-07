@@ -27,7 +27,7 @@ export class Game {
         this.offsetY = data.offsetY
         this.settings = data.settings
 
-        this.background = images.game[this.theme].backgrounds[1]
+        this.background = this.getRandomValidImage(this.images.backgrounds)
 
         for (let index = 0; index < data.settings.goals; index++) {
             this.addGoal()
