@@ -31,8 +31,8 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) 
         size: 60,
         scenery: 10,
         scenery_scale: 1.5,
-        offsetBottom: 220,
-        offsetTop: 150,
+        offsetBottom: 170,
+        offsetTop: 120,
     })
 
     return <SettingsContext.Provider value={{ settings, setSettings }}>{children}</SettingsContext.Provider>

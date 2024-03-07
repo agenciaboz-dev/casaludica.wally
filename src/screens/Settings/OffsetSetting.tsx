@@ -19,7 +19,7 @@ export const OffsetSetting: React.FC<OffsetSettingProps> = ({}) => {
                 <Slider
                     value={settings.offsetTop}
                     onValueChange={(value) => setSettings({ ...settings, offsetTop: value[0] })}
-                    maximumValue={400}
+                    maximumValue={300}
                     minimumValue={0}
                     containerStyle={{ width: "100%" }}
                     step={1}
@@ -33,7 +33,7 @@ export const OffsetSetting: React.FC<OffsetSettingProps> = ({}) => {
                 <Slider
                     value={settings.offsetBottom}
                     onValueChange={(value) => setSettings({ ...settings, offsetBottom: value[0] })}
-                    maximumValue={400}
+                    maximumValue={300}
                     minimumValue={0}
                     containerStyle={{ width: "100%" }}
                     step={1}

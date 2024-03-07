@@ -41,7 +41,7 @@ export class GameObject {
             x = this.generatePos(offsetBottom, offsetTop).x
         }
 
-        if (y + this.height > height - offsetTop) {
+        if (y > height - offsetTop) {
             y = this.generatePos(offsetBottom, offsetTop).y
         }
 
