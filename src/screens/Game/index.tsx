@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react"
 import { NavigationProp } from "@react-navigation/native"
-import { ImageBackground, Text, TouchableOpacity, View } from "react-native"
+import { Dimensions, ImageBackground, Text, TouchableOpacity, View } from "react-native"
 import { Game } from "../../class/Game/Game"
 import { ObjectComponent } from "./ObjectComponent"
 import { GoalsContainer } from "./GoalsContainer"
@@ -13,6 +13,7 @@ interface GamePageProps {
 }
 
 export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
+    const { height, width } = Dimensions.get("screen")
     const offsetY = 100
     const { settings, setSettings } = useContext(SettingsContext)
 
@@ -44,6 +45,16 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
             ))}
             <GoalsContainer game={game} navigation={navigation} offsetY={offsetY} />
             <ScoreContainer game={game} navigation={navigation} />
+            <View
+                style={{
+                    position: "absolute",
+                    borderColor: "blue",
+                    borderWidth: 1,
+                    width,
+                    bottom: game.settings.offsetBottom,
+                    top: game.settings.offsetTop,
+                }}
+            ></View>
         </ImageBackground>
     )
 }

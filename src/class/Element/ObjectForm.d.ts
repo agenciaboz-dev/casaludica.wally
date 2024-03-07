@@ -5,6 +5,5 @@ export declare interface ObjectForm {
     image: ImageSourcePropType
     settings: Settings
     scenery?: boolean
-    offsetY?: number
     goal?: boolean
 }

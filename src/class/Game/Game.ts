@@ -13,8 +13,6 @@ export class Game {
     images = images.game[1]
     goals: ImageSourcePropType[] = []
 
-    offsetY?: number
-
     settings: Settings
 
     reRender: () => void
@@ -24,7 +22,6 @@ export class Game {
     constructor(data: GameForm, reRender: () => void) {
         this.reRender = reRender
         this.theme = data.theme
-        this.offsetY = data.offsetY
         this.settings = data.settings
 
         this.background = this.getRandomValidImage(this.images.backgrounds)
@@ -57,13 +54,13 @@ export class Game {
 
     private addObject(scenery?: boolean) {
         const image = this.getRandomValidImage(scenery ? this.images.scenery : this.images.props)
-        const object = new GameObject({ image, offsetY: this.offsetY, settings: this.settings, scenery }, this.reRender)
+        const object = new GameObject({ image, settings: this.settings, scenery }, this.reRender)
         this.objects.push(object)
     }
 
     private addGoal() {
         const image = this.getRandomValidImage(this.images.objectives, true)
-        const object = new Goal({ image, offsetY: this.offsetY, settings: this.settings }, this.reRender)
+        const object = new Goal({ image, settings: this.settings }, this.reRender)
         this.goals.push(image)
         this.objects.push(object)
     }
@@ -106,5 +103,6 @@ export class Game {
 
         this.misclicks += 1
         this.reRender()
+        console.log(object.y, object.height)
     }
 }

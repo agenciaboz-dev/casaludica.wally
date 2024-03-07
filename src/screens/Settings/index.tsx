@@ -6,6 +6,7 @@ import { ObjectSetting } from "./ObjectsSetting"
 import { SizeSetting } from "./SizeSetting"
 import { ScenerySetting } from "./ScenerySetting"
 import { SceneryScaleSetting } from "./SceneryScaleSetting"
+import { OffsetSetting } from "./OffsetSetting"
 
 interface SettingsPageProps {
     navigation: NavigationProp<any, any>
@@ -19,6 +20,7 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ navigation }) => {
             <ObjectSetting navigation={navigation} />
             <ScenerySetting />
             <SceneryScaleSetting />
+            <OffsetSetting />
 
             <TouchableOpacity style={{ backgroundColor: "#000", padding: 10, borderRadius: 10 }} onPress={() => navigation.navigate("game")}>
                 <Text style={{ fontWeight: "bold", color: "white" }}>começar</Text>

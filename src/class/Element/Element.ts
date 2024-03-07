@@ -26,23 +26,23 @@ export class GameObject {
             this.width = this.width * this.settings.scenery_scale
             this.height = this.height * this.settings.scenery_scale
         }
-        const { x, y, z } = this.generatePos(data.offsetY)
+        const { x, y, z } = this.generatePos(data.settings.offsetBottom, data.settings.offsetTop)
         this.x = x
         this.y = y
         this.elevation = z
         this.image = data.image
     }
 
-    generatePos(offsetY?: number) {
+    generatePos(offsetBottom: number, offsetTop: number) {
         let x = Math.random() * width
-        let y = Math.random() * height + (offsetY || 0)
+        let y = Math.random() * height + (offsetBottom || 0)
 
         if (x + this.width > width) {
-            x = this.generatePos(offsetY).x
+            x = this.generatePos(offsetBottom, offsetTop).x
         }
 
-        if (y + this.height > height) {
-            y = this.generatePos(offsetY).y
+        if (y + this.height > height - offsetTop) {
+            y = this.generatePos(offsetBottom, offsetTop).y
         }
 
         const z = Math.floor(height - y)
