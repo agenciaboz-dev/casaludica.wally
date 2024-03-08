@@ -1,6 +1,6 @@
-import React, { useContext } from "react"
+import React, { useContext, useState } from "react"
 import { NavigationProp } from "@react-navigation/native"
-import { Alert, TouchableOpacity, View } from "react-native"
+import { Alert, Pressable, TouchableOpacity, View } from "react-native"
 import { GameObject } from "../../class/Element/Element"
 import { Game } from "../../class/Game/Game"
 import { Goal } from "../../class/Goal/Goal"
@@ -17,6 +17,8 @@ interface ObjectComponentProps {
 export const ObjectComponent: React.FC<ObjectComponentProps> = ({ navigation, object, game }) => {
     const zIndex = object instanceof Goal && object.found ? 998 : object.elevation
 
+    const [pressed, setPressed] = useState(false)
+
     const { settings } = useContext(SettingsContext)
     const size = object.width * (object.scenery ? settings.scenery_scale : 1)
 
@@ -25,7 +27,7 @@ export const ObjectComponent: React.FC<ObjectComponentProps> = ({ navigation, ob
     }
 
     return (
-        <TouchableOpacity
+        <Pressable
             style={{
                 position: "absolute",
                 bottom: object.y,
@@ -35,12 +37,18 @@ export const ObjectComponent: React.FC<ObjectComponentProps> = ({ navigation, ob
                 pointerEvents: object.scenery ? "none" : "auto",
             }}
             onPress={onPress}
+            onPressIn={() => setPressed(true)}
+            onPressOut={() => setPressed(false)}
         >
             <Image source={object.image} style={{ width: size, height: size }}></Image>
+
+            {pressed && !(object instanceof Goal) && (
+                <Image source={images.onPress} style={{ width: settings.size, height: settings.size, position: "absolute" }} />
+            )}
 
             {object instanceof Goal && object.found && (
                 <Image source={images.found} style={{ width: settings.size, height: settings.size, position: "absolute" }} />
             )}
-        </TouchableOpacity>
+        </Pressable>
     )
 }

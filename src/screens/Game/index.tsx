@@ -9,6 +9,7 @@ import SettingsContext from "../../contexts/settingsContext"
 import { GameForm } from "../../class/Game/GameForm"
 import { Filter } from "../../components/Filter"
 import { Timer } from "../../components/Timer"
+import { ScoreModal } from "../../components/ScoreModal"
 
 interface GamePageProps {
     navigation: NavigationProp<any, any>
@@ -28,14 +29,17 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
     const game_settings: GameForm = { theme: 1, offsetY, settings }
 
     const [game, setGame] = useState(new Game(game_settings, triggerRerender))
+    const [scoreModal, setScoreModal] = useState(false)
 
     const reset = () => {
         setGame(new Game(game_settings, triggerRerender))
     }
 
     useEffect(() => {
-        // console.log(game)
-    }, [game.objects])
+        if (game.found == game.goals.length) {
+            setScoreModal(true)
+        }
+    }, [game.found])
 
     return (
         <ImageBackground
@@ -67,6 +71,7 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
             ></View>
 
             <Timer game={game} />
+            <ScoreModal onClose={() => setScoreModal(false)} open={scoreModal} />
         </ImageBackground>
     )
 }
