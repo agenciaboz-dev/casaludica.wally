@@ -38,7 +38,7 @@ export const GoalsContainer: React.FC<GoalsContainerProps> = ({ game }) => {
                     width: width - 40,
                     height: "100%",
                     alignItems: "center",
-                    overflow: "scroll",
+                    overflow: "hidden",
                 }}
             >
                 <FlatList
