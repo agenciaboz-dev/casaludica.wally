@@ -84,8 +84,8 @@ export class Game {
 
             const itemRight = item.x + item.width
             const itemBottom = item.y + item.height
-            const objectRight = object.x + object.width / 2
-            const objectBottom = object.y + object.height / 2
+            const objectRight = object.x + object.width
+            const objectBottom = object.y + object.height
 
             const overlapsX = item.x < objectRight && itemRight > object.x
 
