@@ -1,8 +1,10 @@
 import { StatusBar } from "expo-status-bar"
-import { StyleSheet, Text, View } from "react-native"
+import { Appearance, StyleSheet, Text, View } from "react-native"
 import { Routes } from "./src/Router"
 
 export default function App() {
+    Appearance.setColorScheme("light")
+    
     return (
         <>
             <StatusBar style="auto" hidden />
