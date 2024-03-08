@@ -29,7 +29,7 @@ const images = {
                 [8]: { url: require("../assets/game/1/scenery/arvore_3.webp"), width: 70, height: 80 },
                 [9]: { url: require("../assets/game/1/scenery/arvore_4.webp"), width: 95, height: 125 },
                 [10]: { url: require("../assets/game/1/scenery/arvore_5.webp"), width: 95, height: 110 },
-                [11]: { url: require("../assets/game/1/scenery/arvore_6.webp"), width: 60, height: 60 },
+                [11]: { url: require("../assets/game/1/scenery/arvore_6.webp"), width: 95, height: 130 },
                 [12]: { url: require("../assets/game/1/scenery/arvore_7.webp"), width: 95, height: 80 },
                 [13]: { url: require("../assets/game/1/scenery/arvore_8.webp"), width: 90, height: 90 },
             },
