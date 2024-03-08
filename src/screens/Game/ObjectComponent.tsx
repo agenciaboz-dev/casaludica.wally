@@ -15,7 +15,7 @@ interface ObjectComponentProps {
 }
 
 export const ObjectComponent: React.FC<ObjectComponentProps> = ({ navigation, object, game }) => {
-    const zIndex = object instanceof Goal && object.found ? 999 : object.elevation
+    const zIndex = object instanceof Goal && object.found ? 998 : object.elevation
 
     const { settings } = useContext(SettingsContext)
     const size = object.width * (object.scenery ? settings.scenery_scale : 1)
