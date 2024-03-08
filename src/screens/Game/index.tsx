@@ -46,6 +46,7 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
     }, [game.loading])
 
     useEffect(() => {
+        console.log(game.found)
         if (game.found == game.goals.length) {
             setScoreModal(true)
         }

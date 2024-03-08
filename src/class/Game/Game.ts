@@ -97,13 +97,16 @@ export class Game {
     }
 
     onGoal(object: Goal) {
-        object.onGoal()
-        this.found += 1
+        if (!object.found) {
+            object.onGoal()
+            this.found += 1
+        }
     }
 
     onObjectPress(object: GameObject | Goal) {
         if (object instanceof Goal) {
             this.onGoal(object)
+            console.log("found")
             return
         }
 
@@ -116,6 +119,5 @@ export class Game {
 
         this.misclicks += 1
         this.reRender()
-        console.log(object.y, object.height)
     }
 }
