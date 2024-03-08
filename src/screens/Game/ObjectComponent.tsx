@@ -37,6 +37,7 @@ export const ObjectComponent: React.FC<ObjectComponentProps> = ({ navigation, ob
             onPress={onPress}
         >
             <Image source={object.image} style={{ width: size, height: size }}></Image>
+
             {object instanceof Goal && object.found && (
                 <Image source={images.found} style={{ width: settings.size, height: settings.size, position: "absolute" }} />
             )}

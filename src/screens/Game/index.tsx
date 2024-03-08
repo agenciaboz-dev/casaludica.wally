@@ -7,6 +7,7 @@ import { GoalsContainer } from "./GoalsContainer"
 import { ScoreContainer } from "./ScoreContainer"
 import SettingsContext from "../../contexts/settingsContext"
 import { GameForm } from "../../class/Game/GameForm"
+import { Filter } from "../../components/Filter"
 
 interface GamePageProps {
     navigation: NavigationProp<any, any>
@@ -50,6 +51,7 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
             {game.objects.map((object, index) => (
                 <ObjectComponent key={index} object={object} navigation={navigation} game={game} />
             ))}
+            {game.filter && <Filter hex={game.filter.hex} opacity={game.filter.opacity} />}
             <GoalsContainer game={game} navigation={navigation} offsetY={offsetY} />
             <ScoreContainer game={game} navigation={navigation} />
             <View

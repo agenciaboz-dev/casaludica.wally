@@ -12,6 +12,7 @@ export class Game {
     objects: (GameObject | Goal)[] = []
     images = images.game[1]
     goals: ImageSourcePropType[] = []
+    filter?: { hex: string; opacity: number }
 
     settings: Settings
 
@@ -25,6 +26,10 @@ export class Game {
         this.settings = data.settings
 
         this.background = this.getRandomValidImage(this.images.backgrounds)
+        if (this.background != 3) {
+            this.filter = this.background == 4 ? { hex: "#ff5b00", opacity: 0.32 } : { hex: "#0d2284", opacity: 0.42 }
+        }
+        console.log(`background: ${this.background}`)
 
         for (let index = 0; index < data.settings.goals; index++) {
             this.addGoal()
