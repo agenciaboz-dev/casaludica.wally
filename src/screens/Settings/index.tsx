@@ -15,7 +15,6 @@ interface SettingsPageProps {
 export const SettingsPage: React.FC<SettingsPageProps> = ({ navigation }) => {
     return (
         <View style={{ flex: 1, alignItems: "center", gap: 20, justifyContent: "center" }}>
-            <SizeSetting />
             <GoalSetting navigation={navigation} />
             <ObjectSetting navigation={navigation} />
             <ScenerySetting />
