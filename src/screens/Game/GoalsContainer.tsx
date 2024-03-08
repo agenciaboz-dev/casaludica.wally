@@ -44,6 +44,7 @@ export const GoalsContainer: React.FC<GoalsContainerProps> = ({ game }) => {
                 <FlatList
                     data={game.objects.filter((object) => object instanceof Goal)}
                     renderItem={({ item, index }) => <GoalComponent key={index} object={item as Goal} />}
+                    contentContainerStyle={{ gap: 7, alignItems: "center", padding: 10 }}
                     horizontal
                     showsHorizontalScrollIndicator={false}
                 />
