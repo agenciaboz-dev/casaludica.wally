@@ -52,8 +52,8 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
                 <ObjectComponent key={index} object={object} navigation={navigation} game={game} />
             ))}
             {game.filter && <Filter hex={game.filter.hex} opacity={game.filter.opacity} />}
-            <GoalsContainer game={game} navigation={navigation} offsetY={offsetY} />
-            <ScoreContainer game={game} navigation={navigation} />
+            <GoalsContainer game={game} />
+            <ScoreContainer game={game} />
             <View
                 style={{
                     position: "absolute",

@@ -6,15 +6,15 @@ import images from "../../images"
 import { Image } from "expo-image"
 
 interface GoalComponentProps {
-    navigation: NavigationProp<any, any>
     object: Goal
 }
 
-export const GoalComponent: React.FC<GoalComponentProps> = ({ navigation, object }) => {
+export const GoalComponent: React.FC<GoalComponentProps> = ({ object }) => {
+    const size = 80
     return (
         <View style={{ position: "relative" }}>
-            <Image key={object.image.toString()} source={object.image} style={{ width: 50, height: 50 }}></Image>
-            {object.found && <Image source={images.found} style={{ width: 50, height: 50, position: "absolute" }} />}
+            <Image key={object.image.toString()} source={object.image} style={{ width: size, height: size }}></Image>
+            {object.found && <Image source={images.found} style={{ width: size, height: size, position: "absolute" }} />}
         </View>
     )
 }
