@@ -20,6 +20,9 @@ export class Game {
 
     misclicks = 0
 
+    started_time = new Date().getTime()
+    time = 0
+
     constructor(data: GameForm, reRender: () => void) {
         this.reRender = reRender
         this.theme = data.theme
@@ -29,7 +32,6 @@ export class Game {
         if (this.background != 3) {
             this.filter = this.background == 4 ? { hex: "#ff5b00", opacity: 0.32 } : { hex: "#0d2284", opacity: 0.42 }
         }
-        console.log(`background: ${this.background}`)
 
         for (let index = 0; index < data.settings.goals; index++) {
             this.addGoal()

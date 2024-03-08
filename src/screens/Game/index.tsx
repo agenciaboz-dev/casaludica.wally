@@ -8,6 +8,7 @@ import { ScoreContainer } from "./ScoreContainer"
 import SettingsContext from "../../contexts/settingsContext"
 import { GameForm } from "../../class/Game/GameForm"
 import { Filter } from "../../components/Filter"
+import { Timer } from "../../components/Timer"
 
 interface GamePageProps {
     navigation: NavigationProp<any, any>
@@ -64,6 +65,8 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
                     top: game.settings.offsetTop,
                 }}
             ></View>
+
+            <Timer game={game} />
         </ImageBackground>
     )
 }
