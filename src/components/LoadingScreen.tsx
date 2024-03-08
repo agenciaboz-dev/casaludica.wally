@@ -23,9 +23,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ loading }) => {
     })
 
     useEffect(() => {
-        if (!loading) {
-            setCurrentWidth(0)
-        }
+        setCurrentWidth(loading ? width : 0)
     }, [loading])
 
     return (

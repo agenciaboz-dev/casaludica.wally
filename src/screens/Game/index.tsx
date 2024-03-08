@@ -37,21 +37,25 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
     }
 
     const nextStage = () => {
-        const new_settings: GameForm = {
-            ...game_settings,
-            settings: {
-                ...game.settings,
-                objects: Math.floor(game.settings.objects * 1.1),
-            },
-            stage: game.stage + 1,
-        }
-        setGame(new Game(new_settings, triggerRerender))
         setScoreModal(false)
+        setLoading(true)
+        setTimeout(() => {
+            const new_settings: GameForm = {
+                ...game_settings,
+                settings: {
+                    ...game.settings,
+                    objects: Math.floor(game.settings.objects * 1.1),
+                },
+                stage: game.stage + 1,
+            }
+            setGame(new Game(new_settings, triggerRerender))
+            setTimeout(() => setLoading(false), 1000)
+        }, 1000)
     }
 
     useEffect(() => {
-        setTimeout(() => setLoading(game.loading), 1000)
-    }, [game.loading])
+        setTimeout(() => setLoading(false), 1000)
+    }, [])
 
     useEffect(() => {
         if (game.found == game.goals.length) {
