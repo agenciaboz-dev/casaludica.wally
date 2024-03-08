@@ -2,30 +2,43 @@ import React, { useEffect, useState } from "react"
 import { NavigationProp } from "@react-navigation/native"
 import { Text, View } from "react-native"
 import { Game } from "../class/Game/Game"
+import { Goal } from "../class/Goal/Goal"
 
 interface TimerProps {
     game: Game
 }
 
 export const Timer: React.FC<TimerProps> = ({ game }) => {
-    const [time, setTime] = useState("")
+    const [time, setTime] = useState("00:00")
+    const [paused, setPaused] = useState(false)
 
-    const formatTime = useEffect(() => {
-        const timer = setInterval(() => {
-            const now = new Date().getTime()
-            const elapsed_time = now - game.started_time
-            game.time = elapsed_time
-            const date = new Date(elapsed_time)
-            setTime(date.toLocaleTimeString("pt-br", { minute: "2-digit", second: "2-digit" }))
-        }, 1000)
-
-        return () => {
-            clearInterval(timer)
-        }
+    useEffect(() => {
+        setPaused(false)
+        setTime("00:00")
     }, [game])
 
+    useEffect(() => {
+        if (game.found == game.goals.length) {
+            setPaused(true)
+        }
+    }, [game.found])
+
+    useEffect(() => {
+        if (!paused) {
+            const timer = setInterval(() => {
+                game.time += 1000
+                const date = new Date(game.time)
+                setTime(date.toLocaleTimeString("pt-br", { minute: "2-digit", second: "2-digit" }))
+            }, 1000)
+
+            return () => {
+                clearInterval(timer)
+            }
+        }
+    }, [game, paused])
+
     return (
-        <View style={{ flex: 1, alignItems: "center", zIndex: 999 }}>
+        <View style={{ flex: 1, alignItems: "center", zIndex: 999, pointerEvents: "none" }}>
             <View
                 style={{
                     backgroundColor: "#c8c8c860",

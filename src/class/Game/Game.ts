@@ -12,6 +12,7 @@ export class Game {
     objects: (GameObject | Goal)[] = []
     images = images.game[1]
     goals: ImageSourcePropType[] = []
+
     filter?: { hex: string; opacity: number }
 
     settings: Settings
@@ -19,9 +20,8 @@ export class Game {
     reRender: () => void
 
     misclicks = 0
-
-    started_time = new Date().getTime()
     time = 0
+    found = 0
 
     constructor(data: GameForm, reRender: () => void) {
         this.reRender = reRender
@@ -93,6 +93,7 @@ export class Game {
 
     onGoal(object: Goal) {
         object.onGoal()
+        this.found += 1
     }
 
     onObjectPress(object: GameObject | Goal) {
