@@ -23,6 +23,7 @@ export class Game {
     misclicks = 0
     time = 0
     found = 0
+    loading = true
 
     constructor(data: GameForm, reRender: () => void) {
         this.reRender = reRender
@@ -46,6 +47,8 @@ export class Game {
         for (let index = 0; index < data.settings.scenery; index++) {
             this.addObject(true)
         }
+
+        this.loading = false
     }
 
     private getRandomValidImage(images: any, goal?: boolean) {

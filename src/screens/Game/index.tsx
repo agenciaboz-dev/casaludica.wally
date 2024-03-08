@@ -10,6 +10,7 @@ import { GameForm } from "../../class/Game/GameForm"
 import { Filter } from "../../components/Filter"
 import { Timer } from "../../components/Timer"
 import { ScoreModal } from "../../components/ScoreModal"
+import { LoadingScreen } from "../../components/LoadingScreen"
 
 interface GamePageProps {
     navigation: NavigationProp<any, any>
@@ -29,6 +30,7 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
 
     const [game, setGame] = useState(new Game(game_settings, triggerRerender))
     const [scoreModal, setScoreModal] = useState(false)
+    const [loading, setLoading] = useState(true)
 
     const reset = () => {
         setGame(new Game({ ...game_settings, stage: game.stage }, triggerRerender))
@@ -39,7 +41,9 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
         setScoreModal(false)
     }
 
-    useEffect(() => {}, [game.stage])
+    useEffect(() => {
+        setTimeout(() => setLoading(game.loading), 1000)
+    }, [game.loading])
 
     useEffect(() => {
         if (game.found == game.goals.length) {
@@ -78,6 +82,7 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
 
             <Timer game={game} />
             <ScoreModal onClose={nextStage} open={scoreModal} game={game} navigation={navigation} />
+            <LoadingScreen loading={loading} />
         </ImageBackground>
     )
 }
