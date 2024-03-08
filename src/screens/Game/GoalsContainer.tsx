@@ -29,7 +29,7 @@ export const GoalsContainer: React.FC<GoalsContainerProps> = ({ game }) => {
         >
             <View
                 style={{
-                    gap: 0,
+                    // gap: 5,
                     flexDirection: "row",
                     backgroundColor: "#c8c8c860",
                     borderColor: "yellow",
@@ -37,17 +37,24 @@ export const GoalsContainer: React.FC<GoalsContainerProps> = ({ game }) => {
                     borderRadius: 1000,
                     width: width - 40,
                     height: "100%",
-                    alignItems: "center",
+                    alignItems: "flex-end",
                     overflow: "hidden",
+                    justifyContent: "space-around",
+                    padding: 20,
                 }}
             >
-                <FlatList
+                {/* <FlatList
                     data={game.objects.filter((object) => object instanceof Goal)}
                     renderItem={({ item, index }) => <GoalComponent key={index} object={item as Goal} />}
                     contentContainerStyle={{ gap: 7, alignItems: "center", padding: 10 }}
                     horizontal
                     showsHorizontalScrollIndicator={false}
-                />
+                /> */}
+                {game.objects
+                    .filter((object) => object instanceof Goal)
+                    .map((item, index) => (
+                        <GoalComponent key={index} object={item as Goal} />
+                    ))}
             </View>
         </View>
     )
