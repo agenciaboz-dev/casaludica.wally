@@ -18,8 +18,8 @@ export const ScenerySetting: React.FC<ScenerySettingProps> = ({}) => {
             <Slider
                 value={settings.scenery}
                 onValueChange={(value) => setSettings({ ...settings, scenery: value[0] })}
-                maximumValue={100}
-                minimumValue={5}
+                maximumValue={15}
+                minimumValue={1}
                 containerStyle={{ width: "100%" }}
                 step={1}
             />

@@ -20,7 +20,7 @@ export const ObjectSetting: React.FC<ObjectSettingProps> = ({ navigation }) => {
             <Slider
                 value={settings.objects}
                 onValueChange={(value) => setSettings({ ...settings, objects: value[0] })}
-                maximumValue={1000}
+                maximumValue={100}
                 minimumValue={1}
                 containerStyle={{ width: "100%" }}
                 step={1}
