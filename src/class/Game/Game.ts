@@ -32,8 +32,8 @@ export class Game {
         this.stage = data.stage || 1
 
         this.background = this.images.backgrounds[this.stage]
-        if (this.background != 3) {
-            this.filter = this.background == 4 ? { hex: "#ff5b00", opacity: 0.32 } : { hex: "#0d2284", opacity: 0.42 }
+        if (this.stage != 1) {
+            this.filter = this.stage == 2 ? { hex: "#ff5b00", opacity: 0.32 } : { hex: "#0d2284", opacity: 0.42 }
         }
 
         for (let index = 0; index < data.settings.goals; index++) {
