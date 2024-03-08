@@ -40,7 +40,7 @@ export const ObjectComponent: React.FC<ObjectComponentProps> = ({ navigation, ob
             onPressIn={() => setPressed(true)}
             onPressOut={() => setPressed(false)}
         >
-            <Image source={object.image} style={{ width: size, height: size }}></Image>
+            <Image source={object.image} style={{ width: object.width, height: object.height }}></Image>
 
             {pressed && !(object instanceof Goal) && (
                 <Image source={images.onPress} style={{ width: object.width, height: object.height, position: "absolute" }} />

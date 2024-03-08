@@ -18,7 +18,6 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ navigation }) => {
             <GoalSetting navigation={navigation} />
             <ObjectSetting navigation={navigation} />
             <ScenerySetting />
-            <SceneryScaleSetting />
             <OffsetSetting />
 
             <TouchableOpacity style={{ backgroundColor: "#000", padding: 10, borderRadius: 10 }} onPress={() => navigation.navigate("game")}>

@@ -1,5 +1,4 @@
 import React from "react"
-import { NavigationProp } from "@react-navigation/native"
 import { View } from "react-native"
 import { Goal } from "../../class/Goal/Goal"
 import images from "../../images"
@@ -10,11 +9,10 @@ interface GoalComponentProps {
 }
 
 export const GoalComponent: React.FC<GoalComponentProps> = ({ object }) => {
-    const size = 80
     return (
         <View style={{ position: "relative" }}>
-            <Image key={object.image.toString()} source={object.image} style={{ width: size, height: size }}></Image>
-            {object.found && <Image source={images.found} style={{ width: size, height: size, position: "absolute" }} />}
+            <Image key={object.image.toString()} source={object.image} style={{ width: object.width, height: object.height }}></Image>
+            {object.found && <Image source={images.found} style={{ width: object.width, height: object.height, position: "absolute" }} />}
         </View>
     )
 }

@@ -28,7 +28,7 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) 
         goals: 2,
         objects: 25,
         scenery: 5,
-        scenery_scale: 1.5,
+        scenery_scale: 1,
         offsetBottom: 170,
         offsetTop: 135,
     })
