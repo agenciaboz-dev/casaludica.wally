@@ -1,11 +1,12 @@
 import React, { useContext } from "react"
 import { NavigationProp } from "@react-navigation/native"
-import { Alert, Image, ImageBackground, TouchableOpacity, View } from "react-native"
+import { Alert, TouchableOpacity, View } from "react-native"
 import { GameObject } from "../../class/Element/Element"
 import { Game } from "../../class/Game/Game"
 import { Goal } from "../../class/Goal/Goal"
 import images from "../../images"
 import SettingsContext from "../../contexts/settingsContext"
+import { Image } from "expo-image"
 
 interface ObjectComponentProps {
     navigation: NavigationProp<any, any>
@@ -35,9 +36,10 @@ export const ObjectComponent: React.FC<ObjectComponentProps> = ({ navigation, ob
             }}
             onPress={onPress}
         >
-            <ImageBackground source={object.image} style={{ width: size, height: size }}>
-                {object instanceof Goal && object.found && <Image source={images.found} style={{ width: settings.size, height: settings.size }} />}
-            </ImageBackground>
+            <Image source={object.image} style={{ width: size, height: size }}></Image>
+            {object instanceof Goal && object.found && (
+                <Image source={images.found} style={{ width: settings.size, height: settings.size, position: "absolute" }} />
+            )}
         </TouchableOpacity>
     )
 }
