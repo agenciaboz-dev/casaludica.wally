@@ -83,8 +83,8 @@ export class Game {
 
             const itemRight = item.x + item.width
             const itemBottom = item.y + item.height
-            const objectRight = object.x + object.width
-            const objectBottom = object.y + object.height
+            const objectRight = object.x + object.width / 2
+            const objectBottom = object.y + object.height / 2
 
             const overlapsX = item.x < objectRight && itemRight > object.x
 
@@ -112,7 +112,7 @@ export class Game {
 
         const overlapping = this.getObjectsOverlapping(object)
         const overlapped_goal = overlapping.find((item) => item instanceof Goal)
-        if (overlapped_goal instanceof Goal && !overlapped_goal.found) {
+        if (overlapped_goal instanceof Goal && !overlapped_goal.found && overlapped_goal.elevation < object.elevation) {
             this.onGoal(overlapped_goal)
             return
         }

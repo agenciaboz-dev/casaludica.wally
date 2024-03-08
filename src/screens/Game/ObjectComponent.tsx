@@ -34,7 +34,7 @@ export const ObjectComponent: React.FC<ObjectComponentProps> = ({ navigation, ob
                 left: object.x,
                 elevation: zIndex,
                 zIndex: zIndex,
-                pointerEvents: object.scenery ? "none" : "auto",
+                pointerEvents: object.scenery ? "none" : object instanceof Goal && object.found ? "none" : "auto",
             }}
             onPress={onPress}
             onPressIn={() => setPressed(true)}
