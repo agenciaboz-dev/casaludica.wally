@@ -17,7 +17,6 @@ interface GamePageProps {
 
 export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
     const { height, width } = Dimensions.get("screen")
-    const offsetY = 100
     const { settings, setSettings } = useContext(SettingsContext)
 
     const [_, setReRender] = useState({})
@@ -26,14 +25,21 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
         setReRender({})
     }
 
-    const game_settings: GameForm = { theme: 1, offsetY, settings }
+    const game_settings: GameForm = { theme: 1, settings }
 
     const [game, setGame] = useState(new Game(game_settings, triggerRerender))
     const [scoreModal, setScoreModal] = useState(false)
 
     const reset = () => {
-        setGame(new Game(game_settings, triggerRerender))
+        setGame(new Game({ ...game_settings, stage: game.stage }, triggerRerender))
     }
+
+    const nextStage = () => {
+        setGame(new Game({ ...game_settings, stage: game.stage + 1 }, triggerRerender))
+        setScoreModal(false)
+    }
+
+    useEffect(() => {}, [game.stage])
 
     useEffect(() => {
         if (game.found == game.goals.length) {
@@ -71,7 +77,7 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
             ></View>
 
             <Timer game={game} />
-            <ScoreModal onClose={() => setScoreModal(false)} open={scoreModal} />
+            <ScoreModal onClose={nextStage} open={scoreModal} game={game} navigation={navigation} />
         </ImageBackground>
     )
 }

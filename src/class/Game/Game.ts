@@ -1,6 +1,6 @@
 import { Alert, ImageSourcePropType } from "react-native"
 import { GameObject } from "../Element/Element"
-import { GameForm, ThemeOption } from "./GameForm"
+import { GameForm, Stage, ThemeOption } from "./GameForm"
 import images from "../../images"
 import { Goal } from "../Goal/Goal"
 import { Settings } from "../../contexts/settingsContext"
@@ -19,6 +19,7 @@ export class Game {
 
     reRender: () => void
 
+    stage: Stage = 1
     misclicks = 0
     time = 0
     found = 0
@@ -27,8 +28,9 @@ export class Game {
         this.reRender = reRender
         this.theme = data.theme
         this.settings = data.settings
+        this.stage = data.stage || 1
 
-        this.background = this.getRandomValidImage(this.images.backgrounds)
+        this.background = this.images.backgrounds[this.stage]
         if (this.background != 3) {
             this.filter = this.background == 4 ? { hex: "#ff5b00", opacity: 0.32 } : { hex: "#0d2284", opacity: 0.42 }
         }
