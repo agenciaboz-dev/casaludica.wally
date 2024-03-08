@@ -30,7 +30,7 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) 
         objects: 25,
         size: 60,
         scenery: 5,
-        scenery_scale: 1.5,
+        scenery_scale: 1.8,
         offsetBottom: 170,
         offsetTop: 120,
     })
