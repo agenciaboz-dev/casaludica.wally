@@ -37,7 +37,15 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
     }
 
     const nextStage = () => {
-        setGame(new Game({ ...game_settings, stage: game.stage + 1 }, triggerRerender))
+        const new_settings: GameForm = {
+            ...game_settings,
+            settings: {
+                ...game.settings,
+                objects: Math.floor(game.settings.objects * 1.1),
+            },
+            stage: game.stage + 1,
+        }
+        setGame(new Game(new_settings, triggerRerender))
         setScoreModal(false)
     }
 
@@ -46,7 +54,6 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
     }, [game.loading])
 
     useEffect(() => {
-        console.log(game.found)
         if (game.found == game.goals.length) {
             setScoreModal(true)
         }

@@ -49,6 +49,7 @@ export class Game {
         }
 
         this.loading = false
+        console.log(`elements: ${data.settings.objects}`)
     }
 
     private getRandomValidImage(images: any, goal?: boolean) {
@@ -106,7 +107,6 @@ export class Game {
     onObjectPress(object: GameObject | Goal) {
         if (object instanceof Goal) {
             this.onGoal(object)
-            console.log("found")
             return
         }
 
