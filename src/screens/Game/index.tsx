@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react"
 import { NavigationProp } from "@react-navigation/native"
-import { Dimensions, ImageBackground, Text, TouchableOpacity, View } from "react-native"
+import { Dimensions, ImageBackground, Pressable, Text, View } from "react-native"
 import { Game } from "../../class/Game/Game"
 import { ObjectComponent } from "./ObjectComponent"
 import { GoalsContainer } from "./GoalsContainer"
@@ -50,9 +50,9 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
             }}
             source={game.background}
         >
-            <TouchableOpacity onPress={reset} style={{ elevation: 999, zIndex: 999, width: 50, borderColor: "red", borderWidth: 1 }}>
+            <Pressable onPress={reset} style={{ elevation: 999, zIndex: 999, width: 50, borderColor: "red", borderWidth: 1 }}>
                 <Text>reset</Text>
-            </TouchableOpacity>
+            </Pressable>
             {game.objects.map((object, index) => (
                 <ObjectComponent key={index} object={object} navigation={navigation} game={game} />
             ))}

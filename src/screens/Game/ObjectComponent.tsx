@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react"
 import { NavigationProp } from "@react-navigation/native"
-import { Alert, Pressable, TouchableOpacity, View } from "react-native"
+import { Pressable } from "react-native"
 import { GameObject } from "../../class/Element/Element"
 import { Game } from "../../class/Game/Game"
 import { Goal } from "../../class/Goal/Goal"
