@@ -67,13 +67,13 @@ export class Game {
 
     private addObject(scenery?: boolean) {
         const image = this.getRandomValidImage(scenery ? this.images.scenery : this.images.props)
-        const object = new GameObject({ image, settings: this.settings, scenery }, this.reRender)
+        const object = new GameObject({ image: image.url, width: image.width, height: image.height, settings: this.settings, scenery }, this.reRender)
         this.objects.push(object)
     }
 
     private addGoal() {
         const image = this.getRandomValidImage(this.images.objectives, true)
-        const object = new Goal({ image, settings: this.settings }, this.reRender)
+        const object = new Goal({ image: image.url, width: image.width, height: image.height, settings: this.settings }, this.reRender)
         this.goals.push(image)
         this.objects.push(object)
     }

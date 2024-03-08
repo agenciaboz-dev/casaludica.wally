@@ -20,8 +20,8 @@ export class GameObject {
         this.reRender = reRender
         this.scenery = data.scenery
         this.settings = data.settings
-        this.width = data.settings.size
-        this.height = data.settings.size
+        this.width = data.width
+        this.height = data.height
         if (data.scenery) {
             this.width = this.width * this.settings.scenery_scale
             this.height = this.height * this.settings.scenery_scale

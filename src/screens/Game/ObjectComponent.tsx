@@ -43,11 +43,11 @@ export const ObjectComponent: React.FC<ObjectComponentProps> = ({ navigation, ob
             <Image source={object.image} style={{ width: size, height: size }}></Image>
 
             {pressed && !(object instanceof Goal) && (
-                <Image source={images.onPress} style={{ width: settings.size, height: settings.size, position: "absolute" }} />
+                <Image source={images.onPress} style={{ width: object.width, height: object.height, position: "absolute" }} />
             )}
 
             {object instanceof Goal && object.found && (
-                <Image source={images.found} style={{ width: settings.size, height: settings.size, position: "absolute" }} />
+                <Image source={images.found} style={{ width: object.width, height: object.height, position: "absolute" }} />
             )}
         </Pressable>
     )

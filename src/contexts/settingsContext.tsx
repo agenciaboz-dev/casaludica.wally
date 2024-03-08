@@ -6,7 +6,6 @@ export interface Settings {
     objects: number
     scenery: number
     scenery_scale: number
-    size: number
     offsetBottom: number
     offsetTop: number
 }
@@ -28,7 +27,6 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) 
     const [settings, setSettings] = useState<Settings>({
         goals: 2,
         objects: 25,
-        size: 60,
         scenery: 5,
         scenery_scale: 1.5,
         offsetBottom: 170,
