@@ -20,8 +20,8 @@
       "android": {
           "userInterfaceStyle": "light",
           "adaptiveIcon": {
-              "foregroundImage": "./assets/foreground-icon",
-              "backgroundImage": "./assets/background-icon",
+              "foregroundImage": "./assets/foreground-icon.png",
+              "backgroundImage": "./assets/background-icon.png",
               "monochromeImage": "./assets/adaptive-icon.png",
               "backgroundColor": "#ffffff"
           },
