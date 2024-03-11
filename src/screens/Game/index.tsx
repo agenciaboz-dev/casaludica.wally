@@ -76,7 +76,7 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
                 <Text>reset</Text>
             </Pressable>
             {game.objects.map((object, index) => (
-                <ObjectComponent key={index} object={object} navigation={navigation} game={game} />
+                <ObjectComponent key={`${object.x}.${object.y}.${index}`} object={object} navigation={navigation} game={game} />
             ))}
             {game.filter && <Filter hex={game.filter.hex} opacity={game.filter.opacity} />}
             <GoalsContainer game={game} />
