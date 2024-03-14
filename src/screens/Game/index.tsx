@@ -84,8 +84,6 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
             <View
                 style={{
                     position: "absolute",
-                    borderColor: "blue",
-                    borderWidth: 1,
                     width,
                     bottom: game.settings.offsetBottom,
                     top: game.settings.offsetTop,

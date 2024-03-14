@@ -1,16 +1,18 @@
 import React from "react"
 import { NavigationProp } from "@react-navigation/native"
-import { Dimensions, FlatList, Image, ImageBackground, View } from "react-native"
+import { Dimensions, FlatList, Image, ImageBackground, Text, TextStyle, View } from "react-native"
 import { Game } from "../../class/Game/Game"
 import { Goal } from "../../class/Goal/Goal"
 import images from "../../images"
 import { GoalComponent } from "./GoalComponent"
+import { colors } from "../../style/colors"
 
 interface GoalsContainerProps {
     game: Game
 }
 
 export const GoalsContainer: React.FC<GoalsContainerProps> = ({ game }) => {
+    const textStyle: TextStyle = { fontFamily: "KGSecondChancesSolid", fontSize: 15, color: colors.white, textAlign: "center" }
     const { width } = Dimensions.get("window")
     return (
         <View
@@ -20,27 +22,30 @@ export const GoalsContainer: React.FC<GoalsContainerProps> = ({ game }) => {
                 bottom: 0,
                 left: 0,
                 width: "100%",
-                height: game.settings.offsetBottom * 0.8,
+                height: game.settings.offsetBottom * 0.7,
                 // pointerEvents: "none",
-                padding: 20,
+                padding: 10,
                 zIndex: 999,
                 elevation: 999,
             }}
         >
+            <View style={{ position: "absolute", backgroundColor: colors.blue, padding: 10, borderRadius: 50, left: 150, right: 150, zIndex: 2 }}>
+                <Text style={textStyle}>Objetivos</Text>
+            </View>
             <View
                 style={{
                     // gap: 5,
                     flexDirection: "row",
-                    backgroundColor: "#c8c8c860",
-                    borderColor: "yellow",
-                    borderWidth: 2,
-                    borderRadius: 1000,
-                    width: width - 40,
+                    backgroundColor: "#ffffff80",
+                    borderColor: colors.blue,
+                    borderWidth: 4,
+                    borderRadius: 25,
+                    width: width - 20,
                     height: "100%",
                     alignItems: "flex-end",
                     overflow: "hidden",
                     justifyContent: "space-around",
-                    padding: 20,
+                    padding: 10,
                 }}
             >
                 {/* <FlatList

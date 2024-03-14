@@ -3,6 +3,7 @@ import { NavigationProp } from "@react-navigation/native"
 import { Text, View } from "react-native"
 import { Game } from "../class/Game/Game"
 import { Goal } from "../class/Goal/Goal"
+import { colors } from "../style/colors"
 
 interface TimerProps {
     game: Game
@@ -41,16 +42,16 @@ export const Timer: React.FC<TimerProps> = ({ game }) => {
         <View style={{ flex: 1, alignItems: "center", zIndex: 999, pointerEvents: "none" }}>
             <View
                 style={{
-                    backgroundColor: "#c8c8c860",
-                    borderColor: "yellow",
-                    borderWidth: 2,
-                    borderRadius: 100,
+                    backgroundColor: "#ffffff80",
+                    borderColor: colors.blue,
+                    borderWidth: 4,
+                    borderRadius: 10,
                     padding: 5,
-                    width: 70,
+                    width: 90,
                     alignItems: "center",
                 }}
             >
-                <Text style={{ fontWeight: "bold", color: "#fff" }}>{time}</Text>
+                <Text style={{ fontWeight: "bold", color: colors.blue }}>{time}</Text>
             </View>
         </View>
     )
