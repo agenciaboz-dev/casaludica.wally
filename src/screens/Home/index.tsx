@@ -3,6 +3,7 @@ import { BackHandler, Dimensions, Platform, View, Image, ImageBackground, Toucha
 import { NavigationProp } from "@react-navigation/native"
 import constants from "expo-constants"
 import { colors } from "../../style/colors"
+import { HomeBG } from "./HomeBG"
 
 interface HomeProps {
     navigation: NavigationProp<any, any>
@@ -14,8 +15,9 @@ export const Home: React.FC<HomeProps> = ({ navigation }) => {
 
     return (
         <View style={{ flex: 1, justifyContent: "center", gap: 20, alignItems: "center" }}>
+            <HomeBG />
             <Image source={require("../../../assets/interface/titulo_principal.webp")} style={{ width: 300, height: 200 }} />
-            <View style={{ gap: 20 }}>
+            <View style={{ gap: 10 }}>
                 <TouchableOpacity onPress={() => navigation.navigate("settings")} style={{ ...buttonStyle, backgroundColor: colors.orange }}>
                     <Text style={textStyle}>Jogar</Text>
                 </TouchableOpacity>
