@@ -14,7 +14,7 @@ export const Home: React.FC<HomeProps> = ({ navigation }) => {
     const textStyle: TextStyle = { fontFamily: "KGSecondChancesSolid", fontSize: 20, color: colors.white, textAlign: "center" }
 
     return (
-        <View style={{ flex: 1, justifyContent: "center", gap: 20, alignItems: "center" }}>
+        <View style={{ flex: 1, justifyContent: "center", gap: 20, alignItems: "center", position: "relative" }}>
             <HomeBG />
             <Image source={require("../../../assets/interface/titulo_principal.webp")} style={{ width: 300, height: 200 }} />
             <View style={{ gap: 10 }}>
@@ -27,9 +27,7 @@ export const Home: React.FC<HomeProps> = ({ navigation }) => {
                     </TouchableOpacity>
                 )}
             </View>
-            <Text style={{ ...textStyle, color: colors.blue, fontSize: 15, position: "absolute", bottom: 5 }}>
-                Versão {constants.expoConfig?.version}
-            </Text>
+            <Text style={{ ...textStyle, fontSize: 15, position: "absolute", bottom: 5 }}>Versão {constants.expoConfig?.version}</Text>
         </View>
     )
 }
