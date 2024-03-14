@@ -53,9 +53,9 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
         }, 1000)
     }
 
-    useEffect(() => {
-        setTimeout(() => setLoading(false), 1000)
-    }, [])
+    // useEffect(() => {
+    //     setTimeout(() => setLoading(false), 1000)
+    // }, [])
 
     useEffect(() => {
         if (game.found == game.goals.length) {

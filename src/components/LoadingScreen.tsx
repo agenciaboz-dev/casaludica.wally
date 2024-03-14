@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { NavigationProp } from "@react-navigation/native"
-import { Dimensions, Text, View } from "react-native"
+import { Dimensions, Image, Text, View } from "react-native"
 import Animated, { Easing, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated"
 
 interface LoadingScreenProps {
@@ -42,9 +42,18 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ loading }) => {
                 style,
             ]}
         >
-            <Text numberOfLines={1} style={{}}>
-                Carregando
+            <Image source={require("../../assets/interface/fundo.webp")} style={{ position: "absolute", zIndex: -1 }} />
+            <Image
+                source={require("../../assets/interface/pilhantra_carregando.webp")}
+                style={{ position: "absolute", width: 150, height: 200, top: 60, right: 80 }}
+            />
+            <Text numberOfLines={1} style={{ fontSize: 40, fontFamily: "KGSecondChancesSketch" }}>
+                Carregando...
             </Text>
+            <Image
+                source={require("../../assets/interface/eletro.webp")}
+                style={{ position: "absolute", width: 150, height: 290, bottom: 20, left: 80 }}
+            />
         </Animated.View>
     )
 }
