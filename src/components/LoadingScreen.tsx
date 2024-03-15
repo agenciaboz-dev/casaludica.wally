@@ -10,6 +10,8 @@ interface LoadingScreenProps {
 export const LoadingScreen: React.FC<LoadingScreenProps> = ({ loading }) => {
     const { width, height } = Dimensions.get("screen")
     const [currentWidth, setCurrentWidth] = useState(width)
+    const [currentPRight, setCurrentPRight] = useState(80)
+    const [currentELeft, setCurrentELeft] = useState(80)
 
     const config = {
         duration: 500,
@@ -22,8 +24,22 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ loading }) => {
         }
     })
 
+    const animatePilhantra = useAnimatedStyle(() => {
+        return {
+            right: withTiming(currentPRight, config),
+        }
+    })
+
+    const animateElectro = useAnimatedStyle(() => {
+        return {
+            left: withTiming(currentELeft, config),
+        }
+    })
+
     useEffect(() => {
         setCurrentWidth(loading ? width : 0)
+        setCurrentPRight(loading ? 80 : width)
+        setCurrentELeft(loading ? 80 : -240)
     }, [loading])
 
     return (
@@ -43,17 +59,15 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ loading }) => {
             ]}
         >
             <Image source={require("../../assets/interface/fundo.webp")} style={{ position: "absolute", zIndex: -1 }} />
-            <Image
-                source={require("../../assets/interface/pilhantra_carregando.webp")}
-                style={{ position: "absolute", width: 150, height: 200, top: 60, right: 80 }}
-            />
+            <Animated.View style={[{ position: "absolute", top: 60, right: 80 }, animatePilhantra]}>
+                <Image source={require("../../assets/interface/pilhantra_carregando.webp")} style={{ width: 150, height: 200 }} />
+            </Animated.View>
             <Text numberOfLines={1} style={{ fontSize: 40, fontFamily: "KGSecondChancesSketch" }}>
                 Carregando...
             </Text>
-            <Image
-                source={require("../../assets/interface/eletro.webp")}
-                style={{ position: "absolute", width: 150, height: 290, bottom: 20, left: 80 }}
-            />
+            <Animated.View style={[{ position: "absolute", bottom: 20, left: 80 }, animateElectro]}>
+                <Image source={require("../../assets/interface/eletro.webp")} style={{ width: 150, height: 290 }} />
+            </Animated.View>
         </Animated.View>
     )
 }
