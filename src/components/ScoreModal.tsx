@@ -1,7 +1,10 @@
 import React from "react"
-import { Modal, Pressable, Text, TouchableOpacity, View } from "react-native"
+import { Image, Modal, Pressable, Text, TouchableOpacity, View } from "react-native"
 import { Game } from "../class/Game/Game"
 import { NavigationProp } from "@react-navigation/native"
+import { buttonStyle } from "../style/buttonStyle"
+import { textStyle } from "../style/textStyle"
+import { colors } from "../style/colors"
 
 interface ScoreModalProps {
     open: boolean
@@ -15,40 +18,53 @@ export const ScoreModal: React.FC<ScoreModalProps> = ({ open, onClose, game, nav
 
     return (
         <Modal animationType="slide" transparent={true} visible={open}>
-            <View style={{ justifyContent: "center", alignItems: "center", flex: 1 }}>
+            <View
+                style={{
+                    justifyContent: "center",
+                    alignItems: "center",
+                    flex: 1,
+                }}
+            >
                 <View
                     style={{
-                        backgroundColor: "#c8c8c870",
-                        padding: 20,
-                        borderColor: "yellow",
-                        borderWidth: 2,
+                        borderColor: colors.blue,
+                        borderWidth: 4,
                         borderRadius: 50,
-                        height: 400,
-                        width: 300,
-                        justifyContent: "space-between",
+                        height: 300,
+                        width: 390,
+                        position: "relative",
                     }}
                 >
-                    <View style={{}}>
-                        <Text style={{ fontSize: 30 }}>Parabéns! Você encontrou tudo</Text>
-                        <Text>tempo: {elapsed_time}</Text>
-                        <Text>erros: {game.misclicks}</Text>
-                    </View>
-                    <View>
+                    <Image
+                        source={require("../../assets/interface/fundo.webp")}
+                        style={{ position: "absolute", height: "100%", width: "100%", borderRadius: 50, resizeMode: "cover" }}
+                    />
+                    <View
+                        style={{
+                            justifyContent: "center",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            gap: 20,
+                            padding: 20,
+                        }}
+                    >
+                        <Text style={{ fontSize: 40, fontFamily: "KGSecondChancesSketch", color: colors.blue }}>Muito bem!</Text>
+                        {game.stage != 3 ? (
+                            <Text style={{ fontSize: 20, fontFamily: "KGSecondChancesSolid", color: colors.blue, textAlign: "center", width: 250 }}>
+                                Você encontrou todos os objetivos deste cenário!
+                            </Text>
+                        ) : (
+                            <Text style={{ fontSize: 20, fontFamily: "KGSecondChancesSolid", color: colors.blue, textAlign: "center", width: 250 }}>
+                                Você completou todos os cenários!
+                            </Text>
+                        )}
+                        {/* <Text>tempo: {elapsed_time}</Text>
+                            <Text>erros: {game.misclicks}</Text> */}
                         {game.stage < 3 && (
-                            <TouchableOpacity
-                                style={{ backgroundColor: "#c8c8c860", padding: 10, borderRadius: 20, borderColor: "blue", borderWidth: 2 }}
-                                onPress={() => onClose()}
-                            >
-                                <Text>Próximo cenário</Text>
+                            <TouchableOpacity style={{ ...buttonStyle, backgroundColor: colors.orange }} onPress={() => onClose()}>
+                                <Text style={textStyle}>Avançar</Text>
                             </TouchableOpacity>
                         )}
-
-                        <TouchableOpacity
-                            style={{ backgroundColor: "#c8c8c860", padding: 10, borderRadius: 20, borderColor: "blue", borderWidth: 2 }}
-                            onPress={() => navigation.navigate("home")}
-                        >
-                            <Text>Início</Text>
-                        </TouchableOpacity>
                     </View>
                 </View>
             </View>
