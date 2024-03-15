@@ -85,7 +85,7 @@ const images = {
     },
 
     found: require("../assets/found.webp"),
-    onPress: require("../assets/onPress.png"),
+    onPress: require("../assets/onPress.webp"),
 }
 
 export default images
