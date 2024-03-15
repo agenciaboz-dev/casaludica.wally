@@ -6,9 +6,12 @@ interface HomeBGProps {}
 export const HomeBG: React.FC<HomeBGProps> = ({}) => {
     return (
         <View style={{ flex: 1, position: "absolute", zIndex: -1 }}>
+            <View
+                style={{ flex: 1, position: "absolute", left: -220, top: -450, width: 450, height: 900, zIndex: -1, backgroundColor: "#ffffff80" }}
+            ></View>
             <Image
                 source={require("../../../assets/game/1/background/1.webp")}
-                style={{ resizeMode: "cover", aspectRatio: 1, position: "absolute", left: -220, top: -500, width: 450, height: 900 }}
+                style={{ resizeMode: "cover", aspectRatio: 1, position: "absolute", left: -220, top: -450, width: 450, height: 900, zIndex: -2 }}
             />
             <Image
                 source={require("../../../assets/interface/ludica_1.webp")}

@@ -1,18 +1,17 @@
 import React from "react"
-import { BackHandler, Dimensions, Platform, View, Image, ImageBackground, TouchableOpacity, Text, TextStyle } from "react-native"
+import { BackHandler, Platform, View, Image, TouchableOpacity, Text } from "react-native"
 import { NavigationProp } from "@react-navigation/native"
 import constants from "expo-constants"
 import { colors } from "../../style/colors"
 import { HomeBG } from "./HomeBG"
+import { buttonStyle } from "../../style/buttonStyle"
+import { textStyle } from "../../style/textStyle"
 
 interface HomeProps {
     navigation: NavigationProp<any, any>
 }
 
 export const Home: React.FC<HomeProps> = ({ navigation }) => {
-    const buttonStyle = { paddingVertical: 10, paddingHorizontal: 25, borderRadius: 15 }
-    const textStyle: TextStyle = { fontFamily: "KGSecondChancesSolid", fontSize: 20, color: colors.white, textAlign: "center" }
-
     return (
         <View style={{ flex: 1, justifyContent: "center", gap: 20, alignItems: "center", position: "relative" }}>
             <HomeBG />
