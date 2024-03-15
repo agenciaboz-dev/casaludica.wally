@@ -14,6 +14,7 @@ import { LoadingScreen } from "../../components/LoadingScreen"
 import { buttonStyle } from "../../style/buttonStyle"
 import { textStyle } from "../../style/textStyle"
 import { colors } from "../../style/colors"
+import { Image } from "expo-image"
 
 interface GamePageProps {
     navigation: NavigationProp<any, any>
@@ -87,6 +88,20 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
             {/* <ScoreContainer game={game} /> */}
             {game.objects.map((object, index) => (
                 <ObjectComponent key={`${object.x}.${object.y}.${index}`} object={object} navigation={navigation} game={game} />
+            ))}
+            {game.gang.map((gangster) => (
+                <Image
+                    key={gangster.y}
+                    source={game.found ? gangster.images.found : gangster.images.searching}
+                    style={{
+                        height: gangster.height,
+                        width: gangster.width,
+                        position: "absolute",
+                        bottom: gangster.y,
+                        left: gangster.x,
+                        zIndex: gangster.y,
+                    }}
+                />
             ))}
             {game.filter && <Filter hex={game.filter.hex} opacity={game.filter.opacity} />}
             <GoalsContainer game={game} />

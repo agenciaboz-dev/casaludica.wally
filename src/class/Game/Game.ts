@@ -1,9 +1,11 @@
-import { Alert, ImageSourcePropType } from "react-native"
+import { Alert, Dimensions, ImageSourcePropType } from "react-native"
 import { GameObject } from "../Element/Element"
 import { GameForm, Stage, ThemeOption } from "./GameForm"
 import images from "../../images"
 import { Goal } from "../Goal/Goal"
 import { Settings } from "../../contexts/settingsContext"
+
+const { width, height } = Dimensions.get("window")
 
 export class Game {
     theme: ThemeOption
@@ -25,6 +27,15 @@ export class Game {
     found = 0
     loading = true
 
+    gang: {
+        id: number
+        x: number
+        y: number
+        width: number
+        height: number
+        images: { found: ImageSourcePropType; searching: ImageSourcePropType }
+    }[] = []
+
     constructor(data: GameForm, reRender: () => void) {
         this.reRender = reRender
         this.theme = data.theme
@@ -35,6 +46,10 @@ export class Game {
         if (this.stage != 1) {
             this.filter = this.stage == 2 ? { hex: "#ff5b00", opacity: 0.32 } : { hex: "#0d2284", opacity: 0.42 }
         }
+
+        this.gang.push(this.addGang())
+        this.gang.push(this.addGang())
+        // console.log(this.gang)
 
         for (let index = 0; index < data.settings.goals; index++) {
             this.addGoal()
@@ -49,7 +64,7 @@ export class Game {
         }
 
         this.loading = false
-        console.log(`elements: ${data.settings.objects}`)
+        // console.log(`elements: ${data.settings.objects}`)
     }
 
     private getRandomValidImage(images: any, goal?: boolean) {
@@ -67,15 +82,66 @@ export class Game {
 
     private addObject(scenery?: boolean) {
         const image = this.getRandomValidImage(scenery ? this.images.scenery : this.images.props)
-        const object = new GameObject({ image: image.url, width: image.width, height: image.height, settings: this.settings, scenery }, this.reRender)
+        const { x, y, z } = this.generatePos(this.settings.offsetBottom, this.settings.offsetTop, image.width, image.height)
+        const object = new GameObject(
+            { x, y, z, image: image.url, width: image.width, height: image.height, settings: this.settings, scenery },
+            this.reRender
+        )
         this.objects.push(object)
     }
 
     private addGoal() {
         const image = this.getRandomValidImage(this.images.objectives, true)
-        const object = new Goal({ image: image.url, width: image.width, height: image.height, settings: this.settings }, this.reRender)
+        const { x, y, z } = this.generatePos(this.settings.offsetBottom, this.settings.offsetTop, image.width, image.height)
+        const object = new Goal({ x, y, z, image: image.url, width: image.width, height: image.height, settings: this.settings }, this.reRender)
         this.goals.push(image)
         this.objects.push(object)
+    }
+
+    private addGang() {
+        const max_index = Object.entries(images.turma).reduce((maximum, [key]) => (Number(key) > maximum ? Number(key) : maximum), 1)
+
+        let random_index = Math.ceil(Math.random() * max_index)
+        // @ts-ignore
+        let random_image = images.turma[random_index]
+
+        let random_gangster = random_image as {
+            searching_url: ImageSourcePropType
+            found_url: ImageSourcePropType
+            width: number
+            height: number
+        }
+
+        let valid_index = false
+
+        while (!valid_index) {
+            if (this.gang.find((item) => item.id == random_index)) {
+                random_index = Math.ceil(Math.random() * max_index)
+            } else {
+                valid_index = true
+                //@ts-ignore
+                random_gangster = images.turma[random_index]
+            }
+        }
+
+        const { x, y } = this.generatePos(this.settings.offsetBottom, this.settings.offsetTop, random_gangster.width, random_gangster.height)
+        const gangster: {
+            x: number
+            y: number
+            width: number
+            height: number
+            id: number
+            images: { found: ImageSourcePropType; searching: ImageSourcePropType }
+        } = {
+            id: random_index,
+            x,
+            y,
+            images: { found: random_gangster.found_url, searching: random_gangster.searching_url },
+            height: random_gangster.height,
+            width: random_gangster.width,
+        }
+
+        return gangster
     }
 
     getObjectsOverlapping(object: GameObject) {
@@ -119,5 +185,34 @@ export class Game {
 
         this.misclicks += 1
         this.reRender()
+    }
+
+    generatePos(offsetBottom: number, offsetTop: number, object_width: number, object_height: number) {
+        let validPosition = false
+        let x = 0
+        let y = 0
+
+        while (!validPosition) {
+            x = Math.random() * (width - object_width)
+            y = Math.random() * (height - offsetTop * 2.3) + offsetBottom
+            // if (y > height - offsetTop) {
+            //     y = this.generateY(offsetBottom, offsetTop, object_height)
+            // }
+
+            validPosition = !this.gang.some((gangster) => {
+                const itemRight = gangster.x + gangster.width
+                const itemBottom = gangster.y + gangster.height
+                const objectRight = x + object_width
+                const objectBottom = y + object_height
+
+                const overlapsX = gangster.x < objectRight && itemRight > x
+                const overlapsY = gangster.y < objectBottom && itemBottom > y
+
+                return overlapsX && overlapsY // Only return true if it overlaps in both x and y
+            })
+        }
+
+        const z = Math.floor(height - y)
+        return { x, y, z }
     }
 }

@@ -84,6 +84,33 @@ const images = {
         },
     },
 
+    turma: {
+        [1]: {
+            searching_url: require("../assets/game/1/turma/1/searching.webp"),
+            found_url: require("../assets/game/1/turma/1/found.webp"),
+            width: 70,
+            height: 120,
+        },
+        [2]: {
+            searching_url: require("../assets/game/1/turma/2/searching.webp"),
+            found_url: require("../assets/game/1/turma/2/found.webp"),
+            width: 70,
+            height: 120,
+        },
+        [3]: {
+            searching_url: require("../assets/game/1/turma/3/searching.webp"),
+            found_url: require("../assets/game/1/turma/3/found.webp"),
+            width: 70,
+            height: 120,
+        },
+        [4]: {
+            searching_url: require("../assets/game/1/turma/4/searching.webp"),
+            found_url: require("../assets/game/1/turma/4/found.webp"),
+            width: 70,
+            height: 120,
+        },
+    },
+
     found: require("../assets/found.webp"),
     onPress: require("../assets/onPress.webp"),
 }

@@ -1,8 +1,6 @@
-import { Alert, Dimensions, ImageSourcePropType } from "react-native"
+import { ImageSourcePropType } from "react-native"
 import { ObjectForm } from "./ObjectForm"
 import { Settings } from "../../contexts/settingsContext"
-
-const { width, height } = Dimensions.get("window")
 
 export class GameObject {
     settings: Settings
@@ -26,27 +24,10 @@ export class GameObject {
             this.width = this.width * this.settings.scenery_scale
             this.height = this.height * this.settings.scenery_scale
         }
-        const { x, y, z } = this.generatePos(data.settings.offsetBottom, data.settings.offsetTop)
-        this.x = x
-        this.y = y
-        this.elevation = z
+
+        this.x = data.x
+        this.y = data.y
+        this.elevation = data.z
         this.image = data.image
-    }
-
-    generatePos(offsetBottom: number, offsetTop: number) {
-        let x = Math.random() * width
-        let y = Math.random() * height + (offsetBottom || 0)
-
-        if (x + this.width > width) {
-            x = this.generatePos(offsetBottom, offsetTop).x
-        }
-
-        if (y > height - offsetTop) {
-            y = this.generatePos(offsetBottom, offsetTop).y
-        }
-
-        const z = Math.floor(height - y)
-
-        return { x, y, z }
     }
 }
