@@ -48,6 +48,8 @@ export const Timer: React.FC<TimerProps> = ({ game }) => {
                     borderRadius: 10,
                     padding: 5,
                     width: 90,
+                    height: "100%",
+                    justifyContent: "center",
                     alignItems: "center",
                 }}
             >

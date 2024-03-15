@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react"
 import { NavigationProp } from "@react-navigation/native"
-import { Dimensions, ImageBackground, Pressable, Text, View } from "react-native"
+import { Dimensions, ImageBackground, Pressable, Text, TouchableOpacity, View } from "react-native"
 import { Game } from "../../class/Game/Game"
 import { ObjectComponent } from "./ObjectComponent"
 import { GoalsContainer } from "./GoalsContainer"
@@ -11,6 +11,9 @@ import { Filter } from "../../components/Filter"
 import { Timer } from "../../components/Timer"
 import { ScoreModal } from "../../components/ScoreModal"
 import { LoadingScreen } from "../../components/LoadingScreen"
+import { buttonStyle } from "../../style/buttonStyle"
+import { textStyle } from "../../style/textStyle"
+import { colors } from "../../style/colors"
 
 interface GamePageProps {
     navigation: NavigationProp<any, any>
@@ -72,15 +75,21 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
             }}
             source={game.background}
         >
-            <Pressable onPress={reset} style={{ elevation: 999, zIndex: 999, width: 50, borderColor: "red", borderWidth: 1 }}>
-                <Text>reset</Text>
-            </Pressable>
+            <View style={{ flexDirection: "row", flex: 1, position: "absolute", top: 10, left: 10, right: 10 }}>
+                <Pressable style={{ ...buttonStyle, backgroundColor: colors.orange, width: "36%" }} onPress={() => navigation.navigate("home")}>
+                    <Text style={textStyle}>Sair</Text>
+                </Pressable>
+                <Timer game={game} />
+                <Pressable onPress={reset} style={{ ...buttonStyle, backgroundColor: colors.orange, width: "36%", paddingHorizontal: 0 }}>
+                    <Text style={textStyle}>Reiniciar</Text>
+                </Pressable>
+            </View>
+            {/* <ScoreContainer game={game} /> */}
             {game.objects.map((object, index) => (
                 <ObjectComponent key={`${object.x}.${object.y}.${index}`} object={object} navigation={navigation} game={game} />
             ))}
             {game.filter && <Filter hex={game.filter.hex} opacity={game.filter.opacity} />}
             <GoalsContainer game={game} />
-            <ScoreContainer game={game} />
             <View
                 style={{
                     position: "absolute",
@@ -90,7 +99,6 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
                 }}
             ></View>
 
-            <Timer game={game} />
             <ScoreModal onClose={nextStage} open={scoreModal} game={game} navigation={navigation} />
             <LoadingScreen loading={loading} />
         </ImageBackground>
