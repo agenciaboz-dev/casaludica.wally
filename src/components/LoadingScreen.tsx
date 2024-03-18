@@ -67,16 +67,19 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ loading }) => {
             ]}
         >
             <Image source={require("../../assets/interface/fundo.webp")} style={{ position: "absolute", zIndex: -1 }} />
-            <Animated.View style={[{ position: "absolute", top: 60, right: 80 }, animatePilhantra]}>
-                <Image source={require("../../assets/interface/pilhantra_carregando.webp")} style={{ width: 150, height: 200 }} />
+            <Animated.View style={[{ position: "absolute", top: 80, right: 80 }, animatePilhantra]}>
+                <Image
+                    source={require("../../assets/interface/pilhantra_carregando.webp")}
+                    style={{ width: 150, height: 200, resizeMode: "contain" }}
+                />
             </Animated.View>
             <Animated.View style={[{ position: "absolute", left: 40 }, animateText]}>
                 <Text numberOfLines={1} style={{ fontSize: 40, fontFamily: "KGSecondChancesSketch" }}>
                     Carregando...
                 </Text>
             </Animated.View>
-            <Animated.View style={[{ position: "absolute", bottom: 20, left: 80 }, animateElectro]}>
-                <Image source={require("../../assets/interface/eletro.webp")} style={{ width: 150, height: 290 }} />
+            <Animated.View style={[{ position: "absolute", bottom: 60, left: 80 }, animateElectro]}>
+                <Image source={require("../../assets/interface/eletro.webp")} style={{ width: 150, height: 290, resizeMode: "contain" }} />
             </Animated.View>
         </Animated.View>
     )
