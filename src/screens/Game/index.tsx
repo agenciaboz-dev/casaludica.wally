@@ -76,7 +76,7 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
             }}
             source={game.background}
         >
-            <View style={{ flexDirection: "row", flex: 1, position: "absolute", top: 10, left: 10, right: 10 }}>
+            <View style={{ flexDirection: "row", flex: 1, position: "absolute", top: 10, left: 10, right: 10, zIndex: 999 }}>
                 <Pressable style={{ ...buttonStyle, backgroundColor: colors.orange, width: "36%" }} onPress={() => navigation.navigate("home")}>
                     <Text style={textStyle}>Sair</Text>
                 </Pressable>
