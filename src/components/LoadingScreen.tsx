@@ -12,6 +12,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ loading }) => {
     const [currentWidth, setCurrentWidth] = useState(width)
     const [currentPRight, setCurrentPRight] = useState(80)
     const [currentELeft, setCurrentELeft] = useState(80)
+    const [currentTLeft, setCurrentTLeft] = useState(40)
 
     const config = {
         duration: 500,
@@ -30,6 +31,12 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ loading }) => {
         }
     })
 
+    const animateText = useAnimatedStyle(() => {
+        return {
+            left: withTiming(currentTLeft, config),
+        }
+    })
+
     const animateElectro = useAnimatedStyle(() => {
         return {
             left: withTiming(currentELeft, config),
@@ -40,6 +47,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ loading }) => {
         setCurrentWidth(loading ? width : 0)
         setCurrentPRight(loading ? 80 : width)
         setCurrentELeft(loading ? 80 : -240)
+        setCurrentTLeft(loading ? 40 : -240)
     }, [loading])
 
     return (
@@ -62,9 +70,11 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ loading }) => {
             <Animated.View style={[{ position: "absolute", top: 60, right: 80 }, animatePilhantra]}>
                 <Image source={require("../../assets/interface/pilhantra_carregando.webp")} style={{ width: 150, height: 200 }} />
             </Animated.View>
-            <Text numberOfLines={1} style={{ fontSize: 40, fontFamily: "KGSecondChancesSketch" }}>
-                Carregando...
-            </Text>
+            <Animated.View style={[{ position: "absolute", left: 40 }, animateText]}>
+                <Text numberOfLines={1} style={{ fontSize: 40, fontFamily: "KGSecondChancesSketch" }}>
+                    Carregando...
+                </Text>
+            </Animated.View>
             <Animated.View style={[{ position: "absolute", bottom: 20, left: 80 }, animateElectro]}>
                 <Image source={require("../../assets/interface/eletro.webp")} style={{ width: 150, height: 290 }} />
             </Animated.View>
