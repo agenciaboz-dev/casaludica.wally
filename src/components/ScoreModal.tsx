@@ -1,5 +1,5 @@
-import React from "react"
-import { Image, Modal, Pressable, Text, TouchableOpacity, View } from "react-native"
+import React, { useEffect, useRef } from "react"
+import { Animated, Image, Modal, Pressable, Text, TouchableOpacity, View } from "react-native"
 import { Game } from "../class/Game/Game"
 import { NavigationProp } from "@react-navigation/native"
 import { buttonStyle } from "../style/buttonStyle"
@@ -15,14 +15,27 @@ interface ScoreModalProps {
 
 export const ScoreModal: React.FC<ScoreModalProps> = ({ open, onClose, game, navigation }) => {
     const elapsed_time = new Date(game.time).toLocaleTimeString("pt-br", { minute: "2-digit", second: "2-digit" })
+    const backdropOpacity = useRef(new Animated.Value(0)).current
+
+    useEffect(() => {
+        Animated.timing(backdropOpacity, {
+            toValue: open ? 0.7 : 0,
+            duration: 500,
+            useNativeDriver: true,
+        }).start()
+    }, [open, backdropOpacity])
 
     return (
-        <Modal animationType="slide" transparent={true} visible={open}>
-            <View
+        <Modal animationType="fade" transparent={true} visible={open} onRequestClose={onClose}>
+            <Animated.View
                 style={{
+                    flex: 1,
                     justifyContent: "center",
                     alignItems: "center",
-                    flex: 1,
+                    backgroundColor: backdropOpacity.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: ["rgba(255, 255, 255, 0)", "rgba(255, 255, 255, 0.5)"],
+                    }),
                 }}
             >
                 <View
@@ -84,7 +97,7 @@ export const ScoreModal: React.FC<ScoreModalProps> = ({ open, onClose, game, nav
                         )}
                     </View>
                 </View>
-            </View>
+            </Animated.View>
         </Modal>
     )
 }
