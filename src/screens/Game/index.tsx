@@ -94,12 +94,13 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
                     key={gangster.y}
                     source={game.found ? gangster.images.found : gangster.images.searching}
                     style={{
-                        height: gangster.height,
-                        width: gangster.width,
+                        height: gangster.height * 1.5,
+                        width: gangster.width * 1.5,
                         position: "absolute",
                         bottom: gangster.y,
                         left: gangster.x,
                         zIndex: gangster.y,
+                        resizeMode: "contain",
                     }}
                 />
             ))}
