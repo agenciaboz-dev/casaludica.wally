@@ -46,9 +46,14 @@ export const ScoreModal: React.FC<ScoreModalProps> = ({ open, onClose, game, nav
                             alignItems: "center",
                             gap: 20,
                             padding: 20,
+                            position: "relative",
                         }}
                     >
-                        <Text style={{ fontSize: 40, fontFamily: "KGSecondChancesSketch", color: colors.blue }}>Muito bem!</Text>
+                        {game.stage != 3 ? (
+                            <Text style={{ fontSize: 40, fontFamily: "KGSecondChancesSketch", color: colors.blue }}>Muito bem!</Text>
+                        ) : (
+                            <Text style={{ fontSize: 40, fontFamily: "KGSecondChancesSketch", color: colors.blue }}>Parabéns!</Text>
+                        )}
                         {game.stage != 3 ? (
                             <Text style={{ fontSize: 20, fontFamily: "KGSecondChancesSolid", color: colors.blue, textAlign: "center", width: 250 }}>
                                 Você encontrou todos os objetivos deste cenário!
@@ -60,9 +65,21 @@ export const ScoreModal: React.FC<ScoreModalProps> = ({ open, onClose, game, nav
                         )}
                         {/* <Text>tempo: {elapsed_time}</Text>
                             <Text>erros: {game.misclicks}</Text> */}
-                        {game.stage < 3 && (
+                        <Image
+                            source={require("../../assets/interface/pilhantra_carregando.webp")}
+                            style={{ width: 80, height: 100, position: "absolute", left: 5, bottom: -15, resizeMode: "contain" }}
+                        />
+                        <Image
+                            source={require("../../assets/interface/pilhantra_resultado_2.webp")}
+                            style={{ width: 80, height: 100, position: "absolute", right: 5, bottom: -15, resizeMode: "contain" }}
+                        />
+                        {game.stage != 3 ? (
                             <TouchableOpacity style={{ ...buttonStyle, backgroundColor: colors.orange }} onPress={() => onClose()}>
                                 <Text style={textStyle}>Avançar</Text>
+                            </TouchableOpacity>
+                        ) : (
+                            <TouchableOpacity style={{ ...buttonStyle, backgroundColor: colors.orange }} onPress={() => navigation.navigate("home")}>
+                                <Text style={textStyle}>Sair</Text>
                             </TouchableOpacity>
                         )}
                     </View>
