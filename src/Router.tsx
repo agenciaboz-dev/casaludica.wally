@@ -5,6 +5,7 @@ import { Home } from "./screens/Home"
 import { GamePage } from "./screens/Game"
 import { SettingsPage } from "./screens/Settings"
 import { SettingsProvider } from "./contexts/settingsContext"
+import { ResultsProvider } from "./contexts/resultsContext"
 
 interface RoutesProps {}
 
@@ -30,13 +31,15 @@ export const Routes: React.FC<RoutesProps> = ({}) => {
 
     return (
         <SettingsProvider>
-            <NavigationContainer>
-                <Stack.Navigator initialRouteName="home" screenOptions={navigator_options}>
-                    <Stack.Screen name={"home"} component={Home} />
-                    <Stack.Screen name={"settings"} component={SettingsPage} />
-                    <Stack.Screen name={"game"} component={GamePage} />
-                </Stack.Navigator>
-            </NavigationContainer>
+            <ResultsProvider>
+                <NavigationContainer>
+                    <Stack.Navigator initialRouteName="home" screenOptions={navigator_options}>
+                        <Stack.Screen name={"home"} component={Home} />
+                        <Stack.Screen name={"settings"} component={SettingsPage} />
+                        <Stack.Screen name={"game"} component={GamePage} />
+                    </Stack.Navigator>
+                </NavigationContainer>
+            </ResultsProvider>
         </SettingsProvider>
     )
 }

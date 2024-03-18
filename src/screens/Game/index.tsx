@@ -41,6 +41,7 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
     }
 
     const nextStage = () => {
+        // salvar os valores de tempo e número de erros em cada fase
         setScoreModal(false)
         setLoading(true)
         setTimeout(() => {
