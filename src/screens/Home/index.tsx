@@ -15,7 +15,7 @@ export const Home: React.FC<HomeProps> = ({ navigation }) => {
     return (
         <View style={{ flex: 1, justifyContent: "center", gap: 20, alignItems: "center", position: "relative" }}>
             <HomeBG />
-            <Image source={require("../../../assets/interface/titulo_principal.webp")} style={{ width: 300, height: 200 }} />
+            <Image source={require("../../../assets/interface/titulo_principal.webp")} style={{ width: 300, height: 200, resizeMode: "contain" }} />
             <View style={{ gap: 10 }}>
                 <TouchableOpacity onPress={() => navigation.navigate("settings")} style={{ ...buttonStyle, backgroundColor: colors.orange }}>
                     <Text style={textStyle}>Jogar</Text>

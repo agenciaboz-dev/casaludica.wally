@@ -91,8 +91,11 @@ export const ScoreModal: React.FC<ScoreModalProps> = ({ open, onClose, game, nav
                                 <Text style={textStyle}>Avançar</Text>
                             </TouchableOpacity>
                         ) : (
-                            <TouchableOpacity style={{ ...buttonStyle, backgroundColor: colors.orange }} onPress={() => navigation.navigate("home")}>
-                                <Text style={textStyle}>Sair</Text>
+                            <TouchableOpacity
+                                style={{ ...buttonStyle, backgroundColor: colors.orange }}
+                                onPress={() => navigation.navigate("results")}
+                            >
+                                <Text style={textStyle}>Ver resultado</Text>
                             </TouchableOpacity>
                         )}
                     </View>
