@@ -29,8 +29,20 @@ export const GoalsContainer: React.FC<GoalsContainerProps> = ({ game }) => {
                 elevation: 999,
             }}
         >
-            <View style={{ position: "absolute", backgroundColor: colors.blue, padding: 10, borderRadius: 50, left: 150, right: 150, zIndex: 2 }}>
-                <Text style={textStyle}>Objetivos</Text>
+            <View
+                style={{
+                    position: "absolute",
+                    backgroundColor: colors.blue,
+                    padding: 10,
+                    borderRadius: 50,
+                    left: 140,
+                    right: 140,
+                    zIndex: 2,
+                }}
+            >
+                <Text numberOfLines={1} style={textStyle}>
+                    Objetivos
+                </Text>
             </View>
             <View
                 style={{
