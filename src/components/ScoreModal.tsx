@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react"
-import { Animated, Image, Modal, Pressable, Text, TouchableOpacity, View } from "react-native"
+import { Animated, Image, Modal, Text, TouchableOpacity, View } from "react-native"
 import { Game } from "../class/Game/Game"
 import { NavigationProp } from "@react-navigation/native"
 import { buttonStyle } from "../style/buttonStyle"
@@ -14,7 +14,6 @@ interface ScoreModalProps {
 }
 
 export const ScoreModal: React.FC<ScoreModalProps> = ({ open, onClose, game, navigation }) => {
-    const elapsed_time = new Date(game.time).toLocaleTimeString("pt-br", { minute: "2-digit", second: "2-digit" })
     const backdropOpacity = useRef(new Animated.Value(0)).current
 
     useEffect(() => {
@@ -76,8 +75,6 @@ export const ScoreModal: React.FC<ScoreModalProps> = ({ open, onClose, game, nav
                                 Você completou todos os cenários!
                             </Text>
                         )}
-                        {/* <Text>tempo: {elapsed_time}</Text>
-                            <Text>erros: {game.misclicks}</Text> */}
                         <Image
                             source={require("../../assets/interface/pilhantra_carregando.webp")}
                             style={{ width: 80, height: 100, position: "absolute", left: 5, bottom: -15, resizeMode: "contain" }}
@@ -91,10 +88,7 @@ export const ScoreModal: React.FC<ScoreModalProps> = ({ open, onClose, game, nav
                                 <Text style={textStyle}>Avançar</Text>
                             </TouchableOpacity>
                         ) : (
-                            <TouchableOpacity
-                                style={{ ...buttonStyle, backgroundColor: colors.orange }}
-                                onPress={() => navigation.navigate("results")}
-                            >
+                            <TouchableOpacity style={{ ...buttonStyle, backgroundColor: colors.orange }} onPress={() => onClose()}>
                                 <Text style={textStyle}>Ver resultado</Text>
                             </TouchableOpacity>
                         )}

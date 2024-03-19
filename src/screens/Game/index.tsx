@@ -1,10 +1,9 @@
 import React, { useContext, useEffect, useState } from "react"
 import { NavigationProp } from "@react-navigation/native"
-import { Dimensions, ImageBackground, Pressable, Text, TouchableOpacity, View } from "react-native"
+import { Dimensions, ImageBackground, Pressable, Text, View } from "react-native"
 import { Game } from "../../class/Game/Game"
 import { ObjectComponent } from "./ObjectComponent"
 import { GoalsContainer } from "./GoalsContainer"
-import { ScoreContainer } from "./ScoreContainer"
 import SettingsContext from "../../contexts/settingsContext"
 import { GameForm } from "../../class/Game/GameForm"
 import { Filter } from "../../components/Filter"
@@ -15,6 +14,7 @@ import { buttonStyle } from "../../style/buttonStyle"
 import { textStyle } from "../../style/textStyle"
 import { colors } from "../../style/colors"
 import { Image } from "expo-image"
+import ResultsContext, { Results } from "../../contexts/resultsContext"
 
 interface GamePageProps {
     navigation: NavigationProp<any, any>
@@ -23,6 +23,7 @@ interface GamePageProps {
 export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
     const { height, width } = Dimensions.get("screen")
     const { settings, setSettings } = useContext(SettingsContext)
+    const { results, setResults } = useContext(ResultsContext)
 
     const [_, setReRender] = useState({})
 
@@ -40,8 +41,21 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
         setGame(new Game({ ...game_settings, stage: game.stage }, triggerRerender))
     }
 
+    const updateResults = (game: Game) => {
+        let new_results: Results = {
+            ...results,
+        }
+
+        new_results[game.stage] = {
+            elapsed_time: new Date(game.time).toLocaleTimeString("pt-br", { minute: "2-digit", second: "2-digit" }),
+            errors: game.misclicks,
+        }
+        setResults(new_results)
+    }
+
     const nextStage = () => {
-        // salvar os valores de tempo e número de erros em cada fase
+        updateResults(game)
+
         setScoreModal(false)
         setLoading(true)
         setTimeout(() => {
@@ -54,6 +68,17 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
                 stage: game.stage + 1,
             }
             setGame(new Game(new_settings, triggerRerender))
+            setTimeout(() => setLoading(false), 1000)
+        }, 1000)
+    }
+
+    const showResults = () => {
+        updateResults(game)
+
+        setScoreModal(false)
+        setLoading(true)
+        setTimeout(() => {
+            navigation.navigate("results")
             setTimeout(() => setLoading(false), 1000)
         }, 1000)
     }
@@ -86,7 +111,6 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
                     <Text style={textStyle}>Reiniciar</Text>
                 </Pressable>
             </View>
-            {/* <ScoreContainer game={game} /> */}
             {game.objects.map((object, index) => (
                 <ObjectComponent key={`${object.x}.${object.y}.${index}`} object={object} navigation={navigation} game={game} />
             ))}
@@ -116,7 +140,7 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
                 }}
             ></View>
 
-            <ScoreModal onClose={nextStage} open={scoreModal} game={game} navigation={navigation} />
+            <ScoreModal onClose={game.stage != 3 ? nextStage : showResults} open={scoreModal} game={game} navigation={navigation} />
             <LoadingScreen loading={loading} />
         </ImageBackground>
     )
