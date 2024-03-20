@@ -2,6 +2,7 @@ import React from "react"
 import { BackHandler, Platform, View, Image, TouchableOpacity, Text } from "react-native"
 import { NavigationProp } from "@react-navigation/native"
 import constants from "expo-constants"
+import Animated, { useSharedValue, useAnimatedStyle, withRepeat, withTiming, Easing } from "react-native-reanimated"
 import { colors } from "../../style/colors"
 import { HomeBG } from "./HomeBG"
 import { buttonStyle } from "../../style/buttonStyle"
@@ -12,10 +13,29 @@ interface HomeProps {
 }
 
 export const Home: React.FC<HomeProps> = ({ navigation }) => {
+    const scale = useSharedValue(1)
+
+    React.useEffect(() => {
+        scale.value = withRepeat(
+            withTiming(1.1, { duration: 2000, easing: Easing.linear }),
+            -1, // Repeat indefinitely
+            true // Reverse the animation on each iteration for a smooth effect
+        )
+    }, [])
+
+    const animatedStyle = useAnimatedStyle(() => {
+        return {
+            transform: [{ scale: scale.value }],
+        }
+    })
+
     return (
         <View style={{ flex: 1, justifyContent: "center", gap: 20, alignItems: "center", position: "relative" }}>
             <HomeBG />
-            <Image source={require("../../../assets/interface/titulo_principal.webp")} style={{ width: 300, height: 200, resizeMode: "contain" }} />
+            <Animated.Image
+                source={require("../../../assets/interface/titulo_principal.webp")}
+                style={[{ width: 300, height: 200, resizeMode: "contain" }, animatedStyle]}
+            />
             <View style={{ gap: 10 }}>
                 <TouchableOpacity onPress={() => navigation.navigate("settings")} style={{ ...buttonStyle, backgroundColor: colors.orange }}>
                     <Text style={textStyle}>Jogar</Text>

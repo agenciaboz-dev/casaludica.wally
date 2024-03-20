@@ -11,7 +11,7 @@ export const HomeBG: React.FC<HomeBGProps> = ({}) => {
 
     useEffect(() => {
         rotation1.value = withRepeat(
-            withSequence(withTiming(6, { duration: 1000 }), withTiming(-6, { duration: 3000 }), withTiming(0, { duration: 1000 })),
+            withSequence(withTiming(3, { duration: 1000 }), withTiming(-3, { duration: 3000 }), withTiming(0, { duration: 1000 })),
             -1, // Repeat indefinitely
             false // Do not reverse
         )
@@ -25,7 +25,7 @@ export const HomeBG: React.FC<HomeBGProps> = ({}) => {
 
     useEffect(() => {
         rotation2.value = withRepeat(
-            withSequence(withTiming(-6, { duration: 1000 }), withTiming(6, { duration: 3000 }), withTiming(0, { duration: 1000 })),
+            withSequence(withTiming(-3, { duration: 1000 }), withTiming(3, { duration: 3000 }), withTiming(0, { duration: 1000 })),
             -1, // Repeat indefinitely
             false // Do not reverse
         )
