@@ -1,23 +1,39 @@
 import React, { useEffect } from "react"
 import { View, Image, ImageBackground } from "react-native"
 import Animated, { useSharedValue, useAnimatedStyle, withRepeat, withSequence, withTiming } from "react-native-reanimated"
+import images from "../../images"
 
 interface HomeBGProps {}
 
 export const HomeBG: React.FC<HomeBGProps> = ({}) => {
-    const rotation = useSharedValue(0)
+    const rotation1 = useSharedValue(0)
+    const rotation2 = useSharedValue(0)
 
     useEffect(() => {
-        rotation.value = withRepeat(
-            withSequence(withTiming(3, { duration: 1000 }), withTiming(-3, { duration: 2000 }), withTiming(0, { duration: 1000 })),
+        rotation1.value = withRepeat(
+            withSequence(withTiming(6, { duration: 1000 }), withTiming(-6, { duration: 3000 }), withTiming(0, { duration: 1000 })),
             -1, // Repeat indefinitely
             false // Do not reverse
         )
-    }, [rotation])
+    }, [rotation1])
 
-    const animatedStyle = useAnimatedStyle(() => {
+    const animatedStyle1 = useAnimatedStyle(() => {
         return {
-            transform: [{ rotate: `${rotation.value}deg` }],
+            transform: [{ rotate: `${rotation1.value}deg` }],
+        }
+    })
+
+    useEffect(() => {
+        rotation2.value = withRepeat(
+            withSequence(withTiming(-6, { duration: 1000 }), withTiming(6, { duration: 3000 }), withTiming(0, { duration: 1000 })),
+            -1, // Repeat indefinitely
+            false // Do not reverse
+        )
+    }, [rotation2])
+
+    const animatedStyle2 = useAnimatedStyle(() => {
+        return {
+            transform: [{ rotate: `${rotation2.value}deg` }],
         }
     })
 
@@ -27,7 +43,7 @@ export const HomeBG: React.FC<HomeBGProps> = ({}) => {
                 style={{ flex: 1, position: "absolute", left: -220, top: -450, width: 450, height: 900, zIndex: -1, backgroundColor: "#ffffff80" }}
             ></View>
             <Image
-                source={require("../../../assets/game/1/background/1.webp")}
+                source={images.game[1].backgrounds[1]}
                 style={{ resizeMode: "cover", aspectRatio: 1, position: "absolute", left: -220, top: -450, width: 450, height: 900, zIndex: -2 }}
             />
             <Animated.Image
@@ -40,20 +56,48 @@ export const HomeBG: React.FC<HomeBGProps> = ({}) => {
                         right: 50,
                         bottom: 50,
                     },
-                    animatedStyle,
+                    animatedStyle1,
                 ]}
             />
-            <Image
+            <Animated.Image
                 source={require("../../../assets/interface/pilhantra_resultado_2.webp")}
-                style={{ width: 100, height: 130, position: "absolute", left: 110, bottom: 140, transform: [{ rotate: "20deg" }] }}
+                style={[
+                    {
+                        width: 100,
+                        height: 130,
+                        position: "absolute",
+                        left: 110,
+                        bottom: 140,
+                        transform: [{ rotate: "20deg" }],
+                    },
+                    animatedStyle2,
+                ]}
             />
-            <Image
+            <Animated.Image
                 source={require("../../../assets/interface/ludico.webp")}
-                style={{ width: 225, height: 250, position: "absolute", right: 40, top: 170 }}
+                style={[
+                    {
+                        width: 225,
+                        height: 250,
+                        position: "absolute",
+                        right: 40,
+                        top: 170,
+                    },
+                    animatedStyle2,
+                ]}
             />
-            <Image
+            <Animated.Image
                 source={require("../../../assets/interface/ludicao.webp")}
-                style={{ width: 140, height: 220, position: "absolute", left: 70, top: 200 }}
+                style={[
+                    {
+                        width: 140,
+                        height: 220,
+                        position: "absolute",
+                        left: 70,
+                        top: 200,
+                    },
+                    animatedStyle1,
+                ]}
             />
         </View>
     )
