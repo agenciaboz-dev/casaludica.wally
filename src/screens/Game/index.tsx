@@ -42,10 +42,6 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
         setTimeout(() => {
             const new_settings: GameForm = {
                 ...game_settings,
-                settings: {
-                    ...game.settings,
-                    objects: Math.floor(game.settings.objects * 1.1),
-                },
                 stage: 1,
             }
             setGame(new Game(new_settings, triggerRerender))
@@ -127,7 +123,7 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
                 <ObjectComponent key={`${object.x}.${object.y}.${index}`} object={object} navigation={navigation} game={game} />
             ))}
             {game.gang.map((gangster) => (
-                <Pressable key={gangster.y} pointerEvents="none" style={{ position: "absolute", bottom: gangster.y, left: gangster.x, zIndex: 9999 }}>
+                <Pressable key={gangster.y} pointerEvents="none" style={{ position: "absolute", bottom: gangster.y, left: gangster.x, zIndex: 998 }}>
                     <Image
                         source={game.found ? gangster.images.found : gangster.images.searching}
                         style={{
