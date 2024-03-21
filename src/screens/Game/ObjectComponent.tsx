@@ -17,6 +17,7 @@ interface ObjectComponentProps {
 
 export const ObjectComponent: React.FC<ObjectComponentProps> = ({ navigation, object, game }) => {
     const zIndex = object instanceof Goal && object.found ? 998 : object.elevation
+    const flipped = Math.random() > 0.5
 
     const [pressed, setPressed] = useState(false)
 
@@ -36,6 +37,7 @@ export const ObjectComponent: React.FC<ObjectComponentProps> = ({ navigation, ob
                 elevation: zIndex,
                 zIndex: zIndex,
                 pointerEvents: object.scenery ? "none" : object instanceof Goal && object.found ? "none" : "auto",
+                transform: [{ scaleX: flipped ? -1 : 1 }],
             }}
             onPress={onPress}
             onPressIn={() => setPressed(true)}
