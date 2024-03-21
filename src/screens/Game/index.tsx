@@ -127,20 +127,21 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
                 <ObjectComponent key={`${object.x}.${object.y}.${index}`} object={object} navigation={navigation} game={game} />
             ))}
             {game.gang.map((gangster) => (
-                <Image
+                <Pressable
                     key={gangster.y}
-                    source={game.found ? gangster.images.found : gangster.images.searching}
                     pointerEvents="none"
-                    style={{
-                        height: gangster.height * 1.5,
-                        width: gangster.width * 1.5,
-                        position: "absolute",
-                        bottom: gangster.y,
-                        left: gangster.x,
-                        zIndex: gangster.y,
-                        resizeMode: "contain",
-                    }}
-                />
+                    style={{ position: "absolute", bottom: gangster.y, left: gangster.x, zIndex: gangster.y }}
+                >
+                    <Image
+                        source={game.found ? gangster.images.found : gangster.images.searching}
+                        style={{
+                            height: gangster.height * 1.5,
+                            width: gangster.width * 1.5,
+
+                            resizeMode: "contain",
+                        }}
+                    />
+                </Pressable>
             ))}
             {game.filter && <Filter hex={game.filter.hex} opacity={game.filter.opacity} />}
             <GoalsContainer game={game} />
