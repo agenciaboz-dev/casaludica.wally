@@ -130,6 +130,7 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
                 <Image
                     key={gangster.y}
                     source={game.found ? gangster.images.found : gangster.images.searching}
+                    pointerEvents="none"
                     style={{
                         height: gangster.height * 1.5,
                         width: gangster.width * 1.5,

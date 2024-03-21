@@ -11,10 +11,12 @@ export class GameObject {
     height: number
     elevation: number
     scenery?: boolean
+    flipped: boolean
 
     reRender: () => void
 
     constructor(data: ObjectForm, reRender: () => void) {
+        this.flipped = Math.random() > 0.5
         this.reRender = reRender
         this.scenery = data.scenery
         this.settings = data.settings

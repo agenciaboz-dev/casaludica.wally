@@ -17,7 +17,7 @@ interface ObjectComponentProps {
 
 export const ObjectComponent: React.FC<ObjectComponentProps> = ({ navigation, object, game }) => {
     const zIndex = object instanceof Goal && object.found ? 998 : object.elevation
-    const flipped = Math.random() > 0.5
+    const flipped = object.flipped
 
     const [pressed, setPressed] = useState(false)
 
