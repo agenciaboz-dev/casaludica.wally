@@ -20,7 +20,7 @@ export const StageResult: React.FC<StageResultProps> = ({ scene, stage }) => {
         borderStyle: "solid",
         borderRadius: 50,
         paddingVertical: 10,
-        paddingHorizontal: 20,
+        width: 180,
     }
 
     return (
