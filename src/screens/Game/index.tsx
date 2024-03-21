@@ -127,11 +127,7 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
                 <ObjectComponent key={`${object.x}.${object.y}.${index}`} object={object} navigation={navigation} game={game} />
             ))}
             {game.gang.map((gangster) => (
-                <Pressable
-                    key={gangster.y}
-                    pointerEvents="none"
-                    style={{ position: "absolute", bottom: gangster.y, left: gangster.x, zIndex: gangster.y }}
-                >
+                <Pressable key={gangster.y} pointerEvents="none" style={{ position: "absolute", bottom: gangster.y, left: gangster.x, zIndex: 9999 }}>
                     <Image
                         source={game.found ? gangster.images.found : gangster.images.searching}
                         style={{
