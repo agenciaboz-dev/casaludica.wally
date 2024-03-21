@@ -6,18 +6,35 @@ import { ResultsBG } from "./ResultsBG"
 import { buttonStyle } from "../../style/buttonStyle"
 import { textStyle } from "../../style/textStyle"
 import { StageResult } from "./StageResult"
+import Animated, { useSharedValue, useAnimatedStyle, withRepeat, withTiming, Easing } from "react-native-reanimated"
 
 interface ResultsPageProps {
     navigation: NavigationProp<any, any>
 }
 
 export const ResultsPage: React.FC<ResultsPageProps> = ({ navigation }) => {
+    const scale = useSharedValue(1)
+
+    React.useEffect(() => {
+        scale.value = withRepeat(
+            withTiming(1.1, { duration: 2000, easing: Easing.linear }),
+            -1, // Repeat indefinitely
+            true // Reverse the animation on each iteration for a smooth effect
+        )
+    }, [])
+
+    const animatedStyle = useAnimatedStyle(() => {
+        return {
+            transform: [{ scale: scale.value }],
+        }
+    })
+
     return (
         <View style={{ flex: 1, justifyContent: "center", gap: 20, alignItems: "center", position: "relative" }}>
             <ResultsBG />
-            <Image
+            <Animated.Image
                 source={require("../../../assets/interface/titulo_resultado.webp")}
-                style={{ width: 300, height: 200, top: 0, position: "absolute", resizeMode: "contain" }}
+                style={[{ width: 300, height: 200, top: 0, position: "absolute", resizeMode: "contain" }, animatedStyle]}
             />
 
             <View style={{ gap: 20, position: "absolute", top: 145 }}>
