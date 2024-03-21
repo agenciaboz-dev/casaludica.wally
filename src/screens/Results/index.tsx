@@ -1,5 +1,5 @@
-import React from "react"
-import { View, TouchableOpacity, Text } from "react-native"
+import React, { useEffect } from "react"
+import { View, TouchableOpacity, Text, BackHandler } from "react-native"
 import { NavigationProp } from "@react-navigation/native"
 import { colors } from "../../style/colors"
 import { ResultsBG } from "./ResultsBG"
@@ -15,13 +15,23 @@ interface ResultsPageProps {
 export const ResultsPage: React.FC<ResultsPageProps> = ({ navigation }) => {
     const scale = useSharedValue(1)
 
-    React.useEffect(() => {
+    useEffect(() => {
         scale.value = withRepeat(
             withTiming(1.1, { duration: 2000, easing: Easing.linear }),
-            -1, // Repeat indefinitely
+            -1, // Repeat animation indefinitely
             true // Reverse the animation on each iteration for a smooth effect
         )
-    }, [])
+
+        // Code below prevents the hardware back button leading back to already finished game
+        const backAction = () => {
+            navigation.navigate("home")
+            return true
+        }
+
+        const backHandler = BackHandler.addEventListener("hardwareBackPress", backAction)
+
+        return () => backHandler.remove()
+    }, [navigation])
 
     const animatedStyle = useAnimatedStyle(() => {
         return {
