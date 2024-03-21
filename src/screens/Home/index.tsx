@@ -37,7 +37,7 @@ export const Home: React.FC<HomeProps> = ({ navigation }) => {
                 style={[{ width: 300, height: 200, resizeMode: "contain" }, animatedStyle]}
             />
             <View style={{ gap: 10 }}>
-                <TouchableOpacity onPress={() => navigation.navigate("settings")} style={{ ...buttonStyle, backgroundColor: colors.orange }}>
+                <TouchableOpacity onPress={() => navigation.navigate("game")} style={{ ...buttonStyle, backgroundColor: colors.orange }}>
                     <Text style={textStyle}>Jogar</Text>
                 </TouchableOpacity>
                 {Platform.OS != "ios" && (

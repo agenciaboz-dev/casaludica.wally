@@ -25,12 +25,12 @@ export default SettingsContext
 
 export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) => {
     const [settings, setSettings] = useState<Settings>({
-        goals: 2,
-        objects: 25,
+        goals: 6,
+        objects: 60,
         scenery: 5,
         scenery_scale: 1,
+        offsetTop: 145,
         offsetBottom: 170,
-        offsetTop: 135,
     })
 
     return <SettingsContext.Provider value={{ settings, setSettings }}>{children}</SettingsContext.Provider>
