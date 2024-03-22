@@ -1,12 +1,15 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { BackHandler, Platform, View, Image, TouchableOpacity, Text } from "react-native"
-import { NavigationProp } from "@react-navigation/native"
+import { NavigationProp, useFocusEffect } from "@react-navigation/native"
 import constants from "expo-constants"
 import Animated, { useSharedValue, useAnimatedStyle, withRepeat, withTiming, Easing } from "react-native-reanimated"
 import { colors } from "../../style/colors"
 import { HomeBG } from "./HomeBG"
 import { buttonStyle } from "../../style/buttonStyle"
 import { textStyle } from "../../style/textStyle"
+import { Audio } from "expo-av"
+import { sounds } from "../../sounds"
+import { MusicWithEasing } from "../../components/MusicWithEasing"
 
 interface HomeProps {
     navigation: NavigationProp<any, any>
@@ -47,6 +50,7 @@ export const Home: React.FC<HomeProps> = ({ navigation }) => {
                 )}
             </View>
             <Text style={{ ...textStyle, fontSize: 15, position: "absolute", bottom: 5 }}>Versão {constants.expoConfig?.version}</Text>
+            <MusicWithEasing source={sounds.main_menu.source} />
         </View>
     )
 }
