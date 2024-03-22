@@ -7,6 +7,8 @@ import { buttonStyle } from "../../style/buttonStyle"
 import { textStyle } from "../../style/textStyle"
 import { StageResult } from "./StageResult"
 import Animated, { useSharedValue, useAnimatedStyle, withRepeat, withTiming, Easing } from "react-native-reanimated"
+import { MusicWithEasing } from "../../components/MusicWithEasing"
+import { sounds } from "../../sounds"
 
 interface ResultsPageProps {
     navigation: NavigationProp<any, any>
@@ -58,6 +60,7 @@ export const ResultsPage: React.FC<ResultsPageProps> = ({ navigation }) => {
                     <Text style={textStyle}>Voltar ao menu</Text>
                 </TouchableOpacity>
             </View>
+            <MusicWithEasing source={sounds.results} timeout={1000} />
         </View>
     )
 }

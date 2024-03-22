@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useContext, useEffect, useMemo, useState } from "react"
 import { NavigationProp } from "@react-navigation/native"
 import { Dimensions, ImageBackground, Pressable, Text, View } from "react-native"
 import { Game } from "../../class/Game/Game"
@@ -15,6 +15,8 @@ import { textStyle } from "../../style/textStyle"
 import { colors } from "../../style/colors"
 import { Image } from "expo-image"
 import ResultsContext, { Results } from "../../contexts/resultsContext"
+import { MusicWithEasing } from "../../components/MusicWithEasing"
+import { sounds } from "../../sounds"
 
 interface GamePageProps {
     navigation: NavigationProp<any, any>
@@ -36,6 +38,9 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
     const [game, setGame] = useState(new Game(game_settings, triggerRerender))
     const [scoreModal, setScoreModal] = useState(false)
     const [loading, setLoading] = useState(true)
+    const [stage, setStage] = useState(game.stage)
+
+    const musicIndex = useMemo(() => (Math.random() > 0.5 ? 1 : 2), [loading])
 
     const reset = () => {
         setLoading(true)
@@ -63,6 +68,7 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
 
     const nextStage = () => {
         updateResults(game)
+        setStage(game.stage + 1)
 
         setScoreModal(false)
         setLoading(true)
@@ -148,6 +154,7 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
 
             <ScoreModal onClose={game.stage != 3 ? nextStage : showResults} open={scoreModal} game={game} navigation={navigation} />
             <LoadingScreen loading={loading} />
+            <MusicWithEasing source={sounds.scenary[stage][musicIndex]} timeout={1000} remount={stage} />
         </ImageBackground>
     )
 }
