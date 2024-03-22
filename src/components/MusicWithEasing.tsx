@@ -17,7 +17,7 @@ export const MusicWithEasing: React.FC<MusicWithEasingProps> = ({ source, remoun
                     await sound?.unloadAsync()
                     clearInterval(interval)
                 } else {
-                    volume -= 0.1
+                    volume -= 0.05
                     if (volume >= 0) await sound.setVolumeAsync(volume)
                 }
             } catch (error) {
@@ -36,6 +36,7 @@ export const MusicWithEasing: React.FC<MusicWithEasingProps> = ({ source, remoun
             setTimeout(() => {
                 Audio.Sound.createAsync(source).then(async (result) => {
                     sound = result.sound
+                    await sound.setVolumeAsync(0.5)
                     await sound.setIsLoopingAsync(true)
                     await sound.playAsync()
                 })

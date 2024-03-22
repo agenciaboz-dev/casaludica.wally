@@ -4,6 +4,8 @@ import { GameForm, Stage, ThemeOption } from "./GameForm"
 import images from "../../images"
 import { Goal } from "../Goal/Goal"
 import { Settings } from "../../contexts/settingsContext"
+import { AVPlaybackSource, Audio } from "expo-av"
+import { sounds } from "../../sounds"
 
 const { width, height } = Dimensions.get("window")
 
@@ -163,9 +165,18 @@ export class Game {
         return overlapping
     }
 
+    async playSound(source: AVPlaybackSource) {
+        const { sound } = await Audio.Sound.createAsync(source)
+        await sound.playAsync()
+        setTimeout(() => {
+            sound.unloadAsync()
+        }, 400)
+    }
+
     onGoal(object: Goal) {
         if (!object.found) {
             object.onGoal()
+            this.playSound(sounds.sfx.found)
             this.found += 1
         }
     }
@@ -184,6 +195,7 @@ export class Game {
         }
 
         this.misclicks += 1
+        this.playSound(sounds.sfx.missclick)
         this.reRender()
     }
 

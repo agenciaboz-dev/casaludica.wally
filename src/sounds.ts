@@ -15,4 +15,9 @@ export const sounds = {
         },
     },
     results: require("../assets/sounds/soundtracks/results.mp3"),
+
+    sfx: {
+        missclick: require("../assets/sounds/sfx/wrong.wav"),
+        found: require("../assets/sounds/sfx/correct.wav"),
+    },
 }
