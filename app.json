@@ -21,14 +21,14 @@
       "bundleIdentifier": "com.agenciabozdev.casaludicawally"
     },
     "android": {
-      "userInterfaceStyle": "light",
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/foreground-icon.png",
-        "backgroundImage": "./assets/background-icon.png",
-        "monochromeImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      },
-      "package": "com.agenciabozdev.casaludicawally"
+        "userInterfaceStyle": "light",
+        "adaptiveIcon": {
+            "foregroundImage": "./assets/foreground-icon.png",
+            "backgroundImage": "./assets/background-icon.png",
+            "monochromeImage": "./assets/adaptive-icon.png",
+            "backgroundColor": "#ffffff"
+        },
+        "package": "com.agenciabozdev.casaludicawally"
     },
     "web": {
       "favicon": "./assets/favicon.png"
