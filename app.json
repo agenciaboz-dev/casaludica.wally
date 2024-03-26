@@ -40,11 +40,11 @@
             }
         },
         "plugins": [
+            ["./plugins/withDisableForcedDarkModeAndroid.js", {}],
             [
-                "./plugins/withDisableForcedDarkModeAndroid.js",
                 "expo-av",
                 {
-                    "microphonePermission": "Permitir o acesso ao microfone para acessar funcionalidades?"
+                    "microphonePermission": "Permitir o acesso ao microfone para acessar funcionalidades relacionadas ao som."
                 }
             ]
         ]
